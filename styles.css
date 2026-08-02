@@ -215,3 +215,91 @@ ul.cross li::before { content:"✕"; color:var(--bad); }
   .slide { display:flex !important; page-break-after:always; height:100vh; }
   .nav,.counter,.progress { display:none; }
 }
+
+/* Utility classes (auto-generated from former inline styles, for strict CSP compliance) */
+.u-f43154 { margin:auto 0; position:relative; z-index:1; }
+.u-5928da { color:var(--warn); }
+.u-92a9a9 { margin-bottom:.9rem; }
+.u-6ece44 { margin-bottom:.9rem; }
+.u-be8920 { font-size:1.4rem; color:var(--warn); }
+.u-58b7f4 { margin-bottom:.9rem; }
+.u-b253d5 { margin-bottom:1.1rem; }
+.u-d62a0c { margin-bottom:1.3rem; }
+.u-4b8d54 { margin-top:0; }
+.u-8785ea { font-size:2.4rem; }
+.u-c3310d { margin-bottom:1rem; }
+.u-cc7c4a { gap:1rem; }
+.u-ba6cae { padding:1.1rem 1.2rem; }
+.u-f61fb3 { padding:1.1rem 1.2rem; }
+.u-ed0038 { padding:1.1rem 1.2rem; }
+.u-1a29dc { padding:1.1rem 1.2rem; }
+.u-d43669 { padding:1.1rem 1.2rem; }
+.u-0318c0 { padding:1.1rem 1.2rem; }
+.u-f9f13e { justify-content:flex-start; padding-top:5vh; }
+.u-99be8c { margin-bottom:.8rem; }
+.u-2bd0f4 { margin-bottom:.9rem; }
+.u-6ea032 { color:var(--terra); margin-bottom:.7rem; font-size:.95rem; text-transform:uppercase; letter-spacing:.08em; }
+.u-0e64e4 { margin-top:0; margin-bottom:1.3rem; }
+.u-998ef0 { color:var(--terra); margin-bottom:.7rem; font-size:.95rem; text-transform:uppercase; letter-spacing:.08em; }
+.u-bccee2 { margin-top:0; }
+.u-c0ef20 { color:var(--terra); margin-bottom:.7rem; font-size:.95rem; text-transform:uppercase; letter-spacing:.08em; }
+.u-4bed51 { margin-top:0; margin-bottom:1.3rem; }
+.u-b85197 { justify-content:flex-start; padding-top:5vh; }
+.u-ef7af9 { margin-bottom:.8rem; }
+.u-0a5ef0 { margin-bottom:.9rem; }
+.u-5627ec { margin-bottom:1.2rem; }
+.u-2cac1a { margin-bottom:1rem; }
+.u-79fd52 { color:#fff; margin-bottom:.6rem; }
+.u-f8e9a1 { margin-top:0; }
+.u-a5a313 { margin-bottom:.9rem; }
+.u-239aff { margin-bottom:1rem; }
+.u-d9b2cb { margin-bottom:1rem; }
+.u-2fc418 { margin-bottom:.8rem; }
+.u-0774bd { margin-bottom:1rem; }
+.u-dc19fb { gap:2.5rem; align-items:stretch; }
+.u-91901c { border-top:4px solid var(--terra); padding:1.5rem 1.6rem; }
+.u-6d32aa { display:flex; align-items:center; gap:.9rem; margin-bottom:1rem; }
+.u-c2ebe1 { margin-bottom:0; font-size:1.4rem; width:48px; height:48px; }
+.u-10c4c1 { color:#fff; font-size:1.25rem; }
+.u-979cf6 { font-size:.85rem; color:var(--muted); }
+.u-7f2e20 { margin-top:0; margin-bottom:1.2rem; }
+.u-4069e1 { border-top:4px solid var(--warn); padding:1.5rem 1.6rem; }
+.u-6e551c { display:flex; align-items:center; gap:.9rem; margin-bottom:1rem; }
+.u-578e68 { margin-bottom:0; font-size:1.4rem; width:48px; height:48px; background:rgba(245,158,11,.12); color:var(--warn); }
+.u-69bdda { color:#fff; font-size:1.25rem; }
+.u-1e7665 { font-size:.85rem; color:var(--muted); }
+.u-2f0d3e { margin-top:0; margin-bottom:1.2rem; }
+.u-a9664a { background:rgba(245,158,11,.06); border-color:var(--warn); }
+.u-6c1a9d { margin-bottom:.9rem; }
+.u-68915f { gap:2.5rem; }
+.u-9c6c2c { margin-bottom:1.1rem; }
+.u-0e1e9e { color:#fff; margin-bottom:.8rem; }
+.u-dab64a { margin-top:0; gap:.5rem; }
+.u-215ea3 { margin-bottom:1rem; }
+.u-c2632d { gap:2.5rem; }
+.u-4dd79b { font-size:.9rem; }
+.u-4802dc { margin-bottom:1.1rem; }
+.u-ebb01f { color:#fff; margin-bottom:.8rem; }
+.u-323b38 { margin-top:0; }
+.u-9ba7f3 { border-color:var(--warn); background:rgba(245,158,11,.07); }
+.u-1a3245 { margin:auto 0; position:relative; z-index:1; max-width:58ch; }
+.u-030cb7 { color:var(--warn); }
+.u-467d74 { position:absolute; bottom:0; left:0; right:0; background:var(--green-800); padding:1.1rem 7vw; display:flex; align-items:center; justify-content:space-between; }
+.u-37a06c { color:var(--terra-100); font-size:.88rem; font-weight:600; }
+.u-0502fe { color:var(--muted); font-size:.78rem; }
+/* Progress bar width steps (avoids inline style writes for CSP compliance) */
+.progress-step-1 { width: 6.6667%; }
+.progress-step-2 { width: 13.3333%; }
+.progress-step-3 { width: 20.0%; }
+.progress-step-4 { width: 26.6667%; }
+.progress-step-5 { width: 33.3333%; }
+.progress-step-6 { width: 40.0%; }
+.progress-step-7 { width: 46.6667%; }
+.progress-step-8 { width: 53.3333%; }
+.progress-step-9 { width: 60.0%; }
+.progress-step-10 { width: 66.6667%; }
+.progress-step-11 { width: 73.3333%; }
+.progress-step-12 { width: 80.0%; }
+.progress-step-13 { width: 86.6667%; }
+.progress-step-14 { width: 93.3333%; }
+.progress-step-15 { width: 100.0%; }
