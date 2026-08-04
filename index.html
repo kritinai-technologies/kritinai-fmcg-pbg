@@ -3,707 +3,600 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>KritinAI Technologies — Enterprise Solutions Deck</title>
+<title>KritinAI Technologies — Case Studies</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700;9..40,800;9..40,900&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css" />
+<style>
+  :root {
+    --green-900: #060F1A;
+    --green-800: #0F1C2D;
+    --green-700: #1A2E4A;
+    --green-600: #243F6B;
+    --green-400: #38BDF8;
+    --green-200: #BAE6FD;
+    --green-100: rgba(56,189,248,.22);
+    --green-50:  rgba(56,189,248,.09);
+    --terra:     #38BDF8;
+    --terra-100: #BAE6FD;
+    --terra-50:  rgba(56,189,248,.08);
+    --sand:   #0F1C2D;
+    --ink:    #F0F6FF;
+    --charcoal: #D1E0F0;
+    --muted:  #94A3B8;
+    --line:   rgba(56,189,248,.18);
+    --good:    #22C55E;
+    --good-50: rgba(34,197,94,.12);
+    --warn:    #F59E0B;
+    --warn-50: rgba(245,158,11,.12);
+    --bad:     #EF4444;
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html, body { height:100%; }
+  body { font-family:"DM Sans",-apple-system,sans-serif; color:var(--charcoal); background:#0A1525; -webkit-font-smoothing:antialiased; letter-spacing:-.005em; }
+
+  .deck { height:100vh; overflow:hidden; }
+  .slide { display:none; height:100vh; width:100vw; padding:5.5vh 7vw; flex-direction:column; justify-content:center; position:relative; background:var(--green-700); overflow:hidden; }
+  .slide.active { display:flex; }
+  .slide.sand   { background:var(--sand); }
+  .slide::before { content:''; position:absolute; top:0; left:0; right:0; height:3px; background:linear-gradient(90deg,var(--terra) 0%,#2563EB 50%,var(--warn) 100%); z-index:2; }
+  .hero { background: radial-gradient(120% 80% at 78% 18%,rgba(56,189,248,.10) 0%,rgba(56,189,248,0) 55%), radial-gradient(90% 70% at 12% 92%,rgba(245,158,11,.07) 0%,rgba(245,158,11,0) 50%), #1A2E4A; }
+
+  .eyebrow { text-transform:uppercase; letter-spacing:.18em; font-size:.78rem; font-weight:700; color:var(--terra); margin-bottom:1rem; }
+  h1 { font-size:4.2rem; line-height:1.04; font-weight:800; color:#fff; letter-spacing:-.03em; }
+  h2 { font-size:2.4rem; line-height:1.08; font-weight:800; color:#fff; letter-spacing:-.02em; margin-bottom:1.2rem; }
+  h3 { font-size:1.1rem; font-weight:700; color:var(--green-200); letter-spacing:-.01em; }
+  p  { font-size:1.1rem; line-height:1.6; color:var(--charcoal); }
+  p.lead { font-size:1.45rem; line-height:1.5; color:var(--muted); max-width:54ch; }
+  .hero h1 { font-size:4.7rem; }
+  .hero .tag { font-size:1.4rem; color:var(--green-200); margin-top:1.4rem; max-width:52ch; line-height:1.45; }
+  .muted { color:var(--muted); }
+
+  .cols   { display:grid; grid-template-columns:1.1fr .9fr; gap:3rem; align-items:start; }
+  .cols-2 { display:grid; grid-template-columns:1fr 1fr; gap:1.1rem; }
+
+  /* Industry tag */
+  .ind-tag { display:inline-flex; align-items:center; gap:.55rem; margin-bottom:1rem; }
+  .ind-tag .sector { background:rgba(56,189,248,.13); border:1px solid rgba(56,189,248,.32); color:var(--terra); border-radius:8px; padding:.3rem .8rem; font-size:.8rem; font-weight:700; letter-spacing:.05em; text-transform:uppercase; }
+  .ind-tag .tech   { background:rgba(245,158,11,.11); border:1px solid rgba(245,158,11,.32); color:var(--warn); border-radius:8px; padding:.3rem .8rem; font-size:.8rem; font-weight:700; letter-spacing:.05em; text-transform:uppercase; }
+
+  /* Problem / solution blocks */
+  .block { margin-bottom:1rem; }
+  .block-label { font-size:.7rem; font-weight:800; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); margin-bottom:.4rem; }
+  .block-body { font-size:1rem; color:var(--charcoal); line-height:1.6; }
+
+  /* What was built */
+  .built-list { list-style:none; margin-top:.3rem; }
+  .built-list li { font-size:.96rem; padding:.32rem 0 .32rem 1.8rem; position:relative; color:var(--charcoal); line-height:1.5; }
+  .built-list li::before { content:"→"; position:absolute; left:0; color:var(--terra); font-weight:700; }
+
+  /* KPI stats — right column */
+  .kpi-stack { display:flex; flex-direction:column; gap:.85rem; }
+  .kpi-card { background:rgba(56,189,248,.08); border:1px solid rgba(56,189,248,.22); border-radius:16px; padding:1.2rem 1.4rem; display:flex; align-items:center; gap:1.2rem; }
+  .kpi-card.gold { background:rgba(245,158,11,.09); border-color:rgba(245,158,11,.28); }
+  .kpi-card.green { background:rgba(34,197,94,.08); border-color:rgba(34,197,94,.25); }
+  .kpi-num  { font-size:2.8rem; font-weight:900; color:var(--terra); line-height:1; letter-spacing:-.04em; flex:none; min-width:5.5rem; }
+  .kpi-card.gold  .kpi-num { color:var(--warn); }
+  .kpi-card.green .kpi-num { color:var(--good); }
+  .kpi-num .unit { font-size:1.4rem; }
+  .kpi-txt  { flex:1; }
+  .kpi-txt .kv { font-size:.82rem; font-weight:800; color:#fff; line-height:1.3; }
+  .kpi-txt .kl { font-size:.78rem; color:var(--muted); margin-top:.18rem; line-height:1.4; }
+
+  /* Callout */
+  .callout { border-left:4px solid var(--terra); background:rgba(56,189,248,.07); border-radius:0 14px 14px 0; padding:1rem 1.2rem; margin-top:.9rem; }
+  .callout p { font-size:.96rem; color:#fff; font-weight:600; line-height:1.55; max-width:none; }
+  .callout.warn { border-color:var(--warn); background:rgba(245,158,11,.07); }
+  .callout.green { border-color:var(--good); background:rgba(34,197,94,.07); }
+
+  /* Divider */
+  .divider { height:1px; background:var(--line); margin:1rem 0; }
+
+  /* Chrome */
+  .footnote { position:absolute; bottom:3vh; left:7vw; right:7vw; font-size:.76rem; color:var(--muted); display:flex; justify-content:space-between; align-items:center; }
+  .progress  { position:fixed; top:0; left:0; height:3px; background:var(--terra); z-index:60; transition:width .25s ease; }
+  .counter   { position:fixed; bottom:20px; left:24px; color:var(--muted); font-size:.82rem; z-index:50; font-family:"DM Mono",monospace; }
+  .nav       { position:fixed; bottom:16px; right:22px; display:flex; gap:8px; z-index:50; }
+  .nav button { background:rgba(255,255,255,.07); border:1px solid rgba(56,189,248,.28); color:var(--terra); border-radius:9px; width:40px; height:40px; font-size:1.2rem; cursor:pointer; }
+  .nav button:hover { background:rgba(56,189,248,.14); }
+  .deck-logo { position:fixed; top:18px; right:22px; z-index:55; width:72px; height:auto; opacity:.92; }
+
+  /* Pill */
+  .pill    { display:inline-flex; align-items:center; background:rgba(56,189,248,.10); color:var(--terra); border:1px solid rgba(56,189,248,.28); border-radius:999px; padding:.4rem 1rem; font-size:.95rem; font-weight:600; }
+  .badge-row { display:flex; flex-wrap:wrap; gap:.7rem; margin-top:1.6rem; }
+
+  /* Slide index badge */
+  .cs-index { position:absolute; top:5vh; right:7vw; font-size:.72rem; font-weight:800; letter-spacing:.12em; text-transform:uppercase; color:var(--muted); }
+
+  @media (max-width:1100px) {
+    h1 { font-size:3.2rem; } h2 { font-size:1.9rem; } .hero h1 { font-size:3.6rem; }
+    .kpi-num { font-size:2.2rem; min-width:4.5rem; }
+  }
+  @media (max-width:768px) {
+    .deck { height:100dvh; }
+    .slide { height:100dvh; padding:6vw 5vw 68px; justify-content:flex-start; overflow-y:auto; -webkit-overflow-scrolling:touch; }
+    h1 { font-size:2.1rem; } h2 { font-size:1.45rem; margin-bottom:.8rem; }
+    h3 { font-size:.95rem; } p { font-size:.9rem; }
+    .hero h1 { font-size:2.4rem; } .hero .tag { font-size:.98rem; margin-top:.9rem; }
+    .cols { grid-template-columns:1fr; gap:1.2rem; }
+    .cols-2 { grid-template-columns:1fr; }
+    .kpi-stack { flex-direction:row; flex-wrap:wrap; }
+    .kpi-card { flex:1; min-width:140px; }
+    .kpi-num { font-size:2rem; min-width:auto; }
+    .footnote { font-size:.66rem; bottom:2vh; }
+    .footnote span:last-child { display:none; }
+    .nav { bottom:10px; right:12px; }
+    .nav button { width:34px; height:34px; font-size:1rem; }
+    .counter { font-size:.7rem; bottom:14px; left:14px; }
+    .deck-logo { width:54px; top:10px; right:12px; }
+    .cs-index { top:auto; bottom:7vh; right:5vw; }
+  }
+  @media print {
+    @page { size:1280px 720px; margin:0; }
+    .deck { height:auto; overflow:visible; }
+    .slide { display:flex !important; page-break-after:always; height:100vh; }
+    .nav,.counter,.progress { display:none; }
+  }
+</style>
 </head>
 <body>
 
-  <img src="kai_logo.png" alt="KritinAI Technologies" class="deck-logo" />
+<img src="kai_logo.png" alt="KritinAI Technologies" class="deck-logo" />
 <div class="progress" id="progress"></div>
 <div class="deck">
 
   <!-- ══ 01 COVER ══════════════════════════════════════════════════════════ -->
   <section class="slide hero active">
-    <div class="u-f43154">
-      <div class="eyebrow">Enterprise Solutions · KritinAI Technologies</div>
-      <h1>From Manual Chaos<br/><span class="u-5928da">to Intelligent Operations.</span></h1>
-      <p class="tag">Power Platform, RPA, AI, and enterprise application delivery — for teams that need less friction, better data, and faster decisions.</p>
+    <div style="margin:auto 0; position:relative; z-index:1;">
+      <div class="eyebrow">Customer Success · KritinAI Technologies</div>
+      <h1>Outcomes we've<br/><span style="color:var(--warn);">delivered.</span></h1>
+      <p class="tag">Six engagements across FMCG, BFSI, Manufacturing, and IT — with measurable results that stayed after we left.</p>
       <div class="badge-row">
-        <span class="pill">Power Apps &amp; Power Automate</span>
-        <span class="pill">RPA &amp; AI</span>
-        <span class="pill">Enterprise Engineering</span>
-        </div>
+        <span class="pill">Power Apps</span>
+        <span class="pill">Custom Development</span>
+        <span class="pill">Automation</span>
+        <span class="pill">AI Implementation</span>
+      </div>
     </div>
     <div class="footnote">
-      <span>KritinAI Technologies Pvt. Ltd. · CIN: U62020PN2025PTC245276</span>
+      <span>KritinAI Technologies Pvt. Ltd. · Full case studies available under NDA</span>
       <span>connectus@kritinai.com · +91 8446878088</span>
     </div>
   </section>
 
-  <!-- ══ 02 CUSTOMER CHALLENGES ════════════════════════════════════════════ -->
+  <!-- ══ 02 FMCG #1 — Distributor Claim Settlement ══════════════════════ -->
   <section class="slide sand">
-    <div class="eyebrow">Do any of these sound familiar?</div>
-    <h2 class="u-92a9a9">The problems most enterprise teams live with.</h2>
-    <div class="challenge-grid">
-      <div class="ch-card">
-        <div class="ico">📧</div>
-        <h3>Approvals by email</h3>
-        <p>Finance, HR, and procurement approvals happen over email chains with no audit trail, no status visibility, and no accountability.</p>
+    <div class="cs-index">FMCG · 01 / 02</div>
+    <div class="ind-tag">
+      <span class="sector">FMCG</span>
+      <span class="tech">Power Apps · Power Automate · ERP Integration</span>
+    </div>
+    <h2>Distributor claim settlement — from 45 days to 9 days.</h2>
+    <div class="cols">
+      <div>
+        <div class="block">
+          <div class="block-label">The problem</div>
+          <div class="block-body">Claims for damaged goods, short shipments, and trade promotions were filed over email and Excel across 200+ distributors. The finance team spent 3–4 hours every day reconciling claims manually. Average settlement time: 45 days. Disputes were common; records were lost.</div>
+        </div>
+        <div class="divider"></div>
+        <div class="block">
+          <div class="block-label">What was built</div>
+          <ul class="built-list">
+            <li>Canvas App for distributors to file claims with photo evidence and shipment references — no email required</li>
+            <li>Multi-tier Power Automate approval workflow routing by claim value, category, and region</li>
+            <li>Custom Connector integrating the platform directly with the client's ERP for settlement posting</li>
+            <li>Finance dashboard with real-time claim status, aging buckets, and exception flags</li>
+          </ul>
+        </div>
+        <div class="callout" style="margin-top:1rem;">
+          <p>Zero claims lost after go-live. Every rejection comes with a documented reason — distributor disputes dropped by over 80%.</p>
+        </div>
       </div>
-      <div class="ch-card">
-        <div class="ico">🧩</div>
-        <h3>Fragmented systems</h3>
-        <p>ERP, HR, finance, and operations run on separate platforms that don't talk to each other. Data lives in silos, reconciliation is manual.</p>
-      </div>
-      <div class="ch-card">
-        <div class="ico">⏳</div>
-        <h3>Delayed decisions</h3>
-        <p>Reports take days to compile from different spreadsheets. By the time leadership has the data, the moment to act has passed.</p>
-      </div>
-      <div class="ch-card">
-        <div class="ico">🔁</div>
-        <h3>Repetitive manual work</h3>
-        <p>Teams spend hours on data entry, copy-pasting between systems, and generating routine reports that should be fully automated.</p>
-      </div>
-      <div class="ch-card">
-        <div class="ico">📋</div>
-        <h3>Compliance gaps</h3>
-        <p>Audit requests reveal missing documentation, incomplete approval trails, and no systematic way to prove process adherence.</p>
-      </div>
-      <div class="ch-card">
-        <div class="ico">👁</div>
-        <h3>No real-time visibility</h3>
-        <p>Management has no single view of supplier status, project progress, budget utilisation, or operational KPIs without asking someone.</p>
+      <div class="kpi-stack">
+        <div class="kpi-card">
+          <div class="kpi-num">80<span class="unit">%</span></div>
+          <div class="kpi-txt">
+            <div class="kv">Faster settlement cycle</div>
+            <div class="kl">45 days → 9 days average end-to-end</div>
+          </div>
+        </div>
+        <div class="kpi-card gold">
+          <div class="kpi-num">200<span class="unit">+</span></div>
+          <div class="kpi-txt">
+            <div class="kv">Distributors on the platform</div>
+            <div class="kl">Onboarded within 3 weeks of go-live</div>
+          </div>
+        </div>
+        <div class="kpi-card green">
+          <div class="kpi-num">0</div>
+          <div class="kpi-txt">
+            <div class="kv">Lost claims post go-live</div>
+            <div class="kl">Full audit trail on every submission</div>
+          </div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-num">3<span class="unit">hr</span></div>
+          <div class="kpi-txt">
+            <div class="kv">Daily finance effort eliminated</div>
+            <div class="kl">Manual reconciliation replaced entirely</div>
+          </div>
+        </div>
       </div>
     </div>
     <div class="footnote">
-      <span>KritinAI Technologies Pvt. Ltd.</span>
-      <span>These are solvable. All of them.</span>
+      <span>KritinAI Technologies Pvt. Ltd. · Full case study available under NDA</span>
     </div>
   </section>
 
-  <!-- ══ 03 BUSINESS OUTCOMES ══════════════════════════════════════════════ -->
+  <!-- ══ 03 FMCG #2 — Field Sales App ════════════════════════════════════ -->
   <section class="slide">
-    <div class="eyebrow">What changes when we engage</div>
-    <h2 class="u-6ece44">Measurable outcomes, not just delivery.</h2>
-    <div class="outcome-grid">
-      <div class="oc-card">
-        <div class="oc-num">70<span class="oc-unit">%</span></div>
-        <div class="oc-lbl">faster approvals</div>
-        <div class="oc-desc">Multi-tier approval workflows replace email chains. Every request has a status, a timeline, and an audit trail.</div>
+    <div class="cs-index">FMCG · 02 / 02</div>
+    <div class="ind-tag">
+      <span class="sector">FMCG</span>
+      <span class="tech">Custom Development · React Native · Node.js · Azure · REST APIs</span>
+    </div>
+    <h2>Field sales app — orders reaching the ERP in 8 minutes, not 48 hours.</h2>
+    <div class="cols">
+      <div>
+        <div class="block">
+          <div class="block-label">The problem</div>
+          <div class="block-body">340+ field sales reps captured daily outlet orders via WhatsApp messages and paper forms. Data reached the back office 24–48 hours late — by which time inventory commitments were already wrong. Management had no visibility on visit frequency, outlet coverage, or competitor activity on the ground.</div>
+        </div>
+        <div class="divider"></div>
+        <div class="block">
+          <div class="block-label">What was built</div>
+          <ul class="built-list">
+            <li>React Native mobile app for field reps — order entry, outlet visit logging, and competitor price capture; works fully offline and syncs when connected</li>
+            <li>Node.js + Azure backend with REST API integration into the client's ERP — orders post automatically on sync, no back-office re-entry</li>
+            <li>Territory management module: rep coverage maps, visit frequency targets, and missed-outlet alerts for area managers</li>
+            <li>Management dashboard with live order pipeline, SKU-level sell-through, and daily field activity — replacing the 48-hour WhatsApp lag entirely</li>
+          </ul>
+        </div>
+        <div class="callout warn">
+          <p>The distribution team could see what was selling in which outlet, in which region — on the same day it happened. Inventory decisions shifted from reactive to planned.</p>
+        </div>
       </div>
-      <div class="oc-card">
-        <div class="oc-num">85<span class="oc-unit">%</span></div>
-        <div class="oc-lbl">less manual data entry</div>
-        <div class="oc-desc">RPA and Power Automate handle data movement between systems. Staff time shifts from processing to decision-making.</div>
-      </div>
-      <div class="oc-card">
-        <div class="oc-num">Real<span class="u-be8920">-time</span></div>
-        <div class="oc-lbl">operational visibility</div>
-        <div class="oc-desc">Live Power BI dashboards replace weekly Excel reports. Leadership sees what's happening as it happens.</div>
-      </div>
-      <div class="oc-card">
-        <div class="oc-num">40<span class="oc-unit">%</span></div>
-        <div class="oc-lbl">reduced operational cost</div>
-        <div class="oc-desc">Automated processes eliminate redundant headcount spend on routine tasks across procurement, finance, and HR.</div>
-      </div>
-      <div class="oc-card">
-        <div class="oc-num">100<span class="oc-unit">%</span></div>
-        <div class="oc-lbl">audit-ready documentation</div>
-        <div class="oc-desc">Every approval, exception, and data change is logged automatically. Compliance evidence is generated, not scrambled for.</div>
-      </div>
-      <div class="oc-card">
-        <div class="oc-num">6<span class="oc-unit">wk</span></div>
-        <div class="oc-lbl">avg time to first go-live</div>
-        <div class="oc-desc">Agile delivery with pre-built accelerators means your first live solution is weeks away, not quarters.</div>
+      <div class="kpi-stack">
+        <div class="kpi-card">
+          <div class="kpi-num">8<span class="unit">min</span></div>
+          <div class="kpi-txt">
+            <div class="kv">Order-to-ERP time</div>
+            <div class="kl">Down from 24–48 hours</div>
+          </div>
+        </div>
+        <div class="kpi-card gold">
+          <div class="kpi-num">340<span class="unit">+</span></div>
+          <div class="kpi-txt">
+            <div class="kv">Field reps on the platform</div>
+            <div class="kl">Across regions, live from day one</div>
+          </div>
+        </div>
+        <div class="kpi-card green">
+          <div class="kpi-num">18<span class="unit">%</span></div>
+          <div class="kpi-txt">
+            <div class="kv">Improvement in first-fill rates</div>
+            <div class="kl">Better inventory decisions from real-time data</div>
+          </div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-num">0</div>
+          <div class="kpi-txt">
+            <div class="kv">WhatsApp orders</div>
+            <div class="kl">Fully replaced by structured app capture</div>
+          </div>
+        </div>
       </div>
     </div>
     <div class="footnote">
-      <span>KritinAI Technologies Pvt. Ltd. — Outcomes based on delivered client engagements</span>
+      <span>KritinAI Technologies Pvt. Ltd. · Full case study available under NDA</span>
     </div>
   </section>
 
-  <!-- ══ 04 COMPANY PROFILE ════════════════════════════════════════════════ -->
+  <!-- ══ 04 BFSI #1 — Bank Reconciliation ═════════════════════════════ -->
   <section class="slide sand">
-    <div class="eyebrow">Company profile</div>
-    <h2 class="u-58b7f4">Twenty years of enterprise engineering,<br/>built into one firm.</h2>
-    <div class="cols cols-top">
+    <div class="cs-index">BFSI · 01 / 02</div>
+    <div class="ind-tag">
+      <span class="sector">BFSI</span>
+      <span class="tech">RPA · UiPath · Power Automate</span>
+    </div>
+    <h2>Bank reconciliation — from 6 hours daily to 20 minutes, zero errors.</h2>
+    <div class="cols">
       <div>
-        <p class="u-b253d5">KritinAI Technologies Pvt. Ltd. was founded by Awanish Kumar Prajapati — Co-Founder and Director — after two decades of enterprise delivery inside Morgan Stanley, Barclays, Deutsche Bank, Citi, UBS, and Fiserv. Our team includes Solution Architects, senior developers, QA engineers, RPA specialists, and AI engineers.</p>
-        <p class="u-d62a0c">Pune-based, PCI-DSS, SOX, and RBI compliant. Our professionals have delivered for teams at EY, Deloitte, KPMG, and Accenture — the same rigour now available at competitive India market rates.</p>
-        <div class="callout">
-          <p>We are not a staffing agency. Every resource we field has a Solution Architect backstop, CoE governance, and a 1-month replacement guarantee.</p>
+        <div class="block">
+          <div class="block-label">The problem</div>
+          <div class="block-body">A finance team was manually reconciling 3,000+ daily transactions across multiple bank accounts. The process took 5–6 hours every morning, required two dedicated staff members, and regularly produced errors that led to delayed reporting and compliance flags during audits.</div>
+        </div>
+        <div class="divider"></div>
+        <div class="block">
+          <div class="block-label">What was built</div>
+          <ul class="built-list">
+            <li>UiPath unattended bot extracting bank statements across all accounts — runs at 6 AM daily without human trigger</li>
+            <li>Automated matching engine reconciling transactions against the ledger with configurable tolerance rules</li>
+            <li>Power Automate exception workflow routing unmatched items to the finance team with full context attached — no manual hunting</li>
+            <li>Audit log generated automatically for every reconciliation run, audit-ready from day one</li>
+          </ul>
+        </div>
+        <div class="callout green">
+          <p>The two staff members previously running reconciliation were redeployed to financial analysis work within 30 days of go-live.</p>
         </div>
       </div>
-      <div>
-        <div class="cols-2 u-4b8d54">
-          <div class="stat feature">
-            <div class="big">20<span class="unit">+</span></div>
-            <div class="lbl">Years of enterprise engineering by our founding team</div>
+      <div class="kpi-stack">
+        <div class="kpi-card">
+          <div class="kpi-num">94<span class="unit">%</span></div>
+          <div class="kpi-txt">
+            <div class="kv">Time saved daily</div>
+            <div class="kl">6 hours → 20 minutes per day</div>
           </div>
-
-          <div class="stat">
-            <div class="big">6<span class="unit">+</span></div>
-            <div class="lbl">Tier-one global BFSI institutions in our delivery heritage</div>
+        </div>
+        <div class="kpi-card gold">
+          <div class="kpi-num">3<span class="unit">K+</span></div>
+          <div class="kpi-txt">
+            <div class="kv">Transactions processed daily</div>
+            <div class="kl">Fully automated, unattended</div>
           </div>
-          <div class="stat">
-            <div class="big u-8785ea">MUR 80<span class="unit">k</span></div>
-            <div class="lbl">Starting rate per month — resource engagements, based on experience</div>
+        </div>
+        <div class="kpi-card green">
+          <div class="kpi-num">0</div>
+          <div class="kpi-txt">
+            <div class="kv">Manual errors post go-live</div>
+            <div class="kl">100% match accuracy on in-tolerance items</div>
+          </div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-num">2</div>
+          <div class="kpi-txt">
+            <div class="kv">FTEs redeployed</div>
+            <div class="kl">From data entry to higher-value analysis</div>
           </div>
         </div>
       </div>
     </div>
     <div class="footnote">
-      <span>KritinAI Technologies Pvt. Ltd. · Pune, India</span>
-      <span>GSTIN: 27AAMCK1105B1Z2 · CIN: U62020PN2025PTC245276</span>
+      <span>KritinAI Technologies Pvt. Ltd. · Full case study available under NDA</span>
     </div>
   </section>
 
-  <!-- ══ 05 WHAT WE DO ═════════════════════════════════════════════════════ -->
+  <!-- ══ 05 BFSI #2 — Loan Origination & KYC ══════════════════════════ -->
   <section class="slide">
-    <div class="eyebrow">What we do</div>
-    <h2 class="u-c3310d">Technology across the full enterprise stack.</h2>
-    <div class="cols-2 u-cc7c4a">
-      <div class="card u-ba6cae">
-        <div class="ico">⚡</div>
-        <h3>Power Apps &amp; Power Automate</h3>
-        <p>Canvas and Model-Driven apps, approval workflows, Dataverse, SharePoint, Custom Connectors — full ALM from Dev to Production.</p>
-      </div>
-      <div class="card u-f61fb3">
-        <div class="ico">📊</div>
-        <h3>Power BI &amp; ETL / Data</h3>
-        <p>KPI dashboards, operational reports, embedded analytics, Azure Data Factory pipelines, and ETL from SAP, ERP, or legacy sources.</p>
-      </div>
-      <div class="card u-ed0038">
-        <div class="ico">🤖</div>
-        <h3>RPA &amp; Intelligent Automation</h3>
-        <p>UiPath, Automation Anywhere, Power Automate Desktop — attended and unattended bots, process mining, intelligent document processing.</p>
-      </div>
-      <div class="card u-1a29dc">
-        <div class="ico">🧠</div>
-        <h3>AI &amp; Copilot Studio</h3>
-        <p>Azure OpenAI, document intelligence, LLM-powered agents, and Copilot Studio enterprise bots grounded in your data.</p>
-      </div>
-      <div class="card u-d43669">
-        <div class="ico">🏗</div>
-        <h3>Enterprise Application Development</h3>
-        <p>React, Node.js, .NET Core, Java, Python — custom applications with ERP, CRM, and legacy system integration.</p>
-      </div>
-      <div class="card u-0318c0">
-        <div class="ico">🏛</div>
-        <h3>Solution Architecture</h3>
-        <p>Enterprise architects for platform design, integration patterns, cloud strategy, ALM governance, and CoE setup.</p>
-      </div>
+    <div class="cs-index">BFSI · 02 / 02</div>
+    <div class="ind-tag">
+      <span class="sector">BFSI</span>
+      <span class="tech">Copilot Studio · Document Intelligence · Power Automate</span>
     </div>
-    <div class="footnote">
-      <span>KritinAI Technologies Pvt. Ltd.</span>
-      <span>Microsoft · Azure · UiPath · AA · OpenAI · SAP · Salesforce</span>
-    </div>
-  </section>
-
-  <!-- ══ 06 INDUSTRY USE CASES ═════════════════════════════════════════════ -->
-  <section class="slide sand u-f9f13e">
-    <div class="eyebrow">Industry use cases</div>
-    <h2 class="u-99be8c">Relevant across your industry — and beyond.</h2>
-    <div class="ind-grid">
-      <div class="ind-card">
-        <div class="ind-hd"><div class="ind-ico">🏭</div><div class="ind-name">Manufacturing &amp; FMCG</div></div>
-        <div class="ind-uses">
-          <div class="ind-use">ERP warehouse management — stock movements, GRN, dispatch via Power Apps</div>
-          <div class="ind-use">CAPEX / OPEX approval routing with budget tracking and Power BI dashboards</div>
-          <div class="ind-use">Supplier onboarding, due diligence, and vendor performance scorecards</div>
-          <div class="ind-use">Production quality capture and non-conformance reporting app</div>
-          <div class="ind-use">RPA bots for invoice processing and purchase order reconciliation</div>
-        </div>
-      </div>
-      <div class="ind-card">
-        <div class="ind-hd"><div class="ind-ico">🛒</div><div class="ind-name">Retail &amp; Distribution</div></div>
-        <div class="ind-uses">
-          <div class="ind-use">Store performance dashboards — real-time sales, shrinkage, and footfall</div>
-          <div class="ind-use">Inventory reconciliation automation — ERP to warehouse, zero manual keying</div>
-          <div class="ind-use">Vendor claim management and trade promotion tracking</div>
-          <div class="ind-use">Field force activity capture — visits, orders, competitor intel</div>
-          <div class="ind-use">Returns and credit note approval workflows with audit trail</div>
-        </div>
-      </div>
-      <div class="ind-card">
-        <div class="ind-hd"><div class="ind-ico">🏦</div><div class="ind-name">BFSI &amp; FinTech</div></div>
-        <div class="ind-uses">
-          <div class="ind-use">Loan origination and processing workflows — KYC, credit, disbursement</div>
-          <div class="ind-use">Bank reconciliation RPA bots — thousands of transactions daily</div>
-          <div class="ind-use">Regulatory reporting extraction from legacy core banking systems</div>
-          <div class="ind-use">Branch operations app — account services, complaint capture, audit</div>
-          <div class="ind-use">AI-powered document extraction for onboarding and compliance packs</div>
-        </div>
-      </div>
-      <div class="ind-card">
-        <div class="ind-hd"><div class="ind-ico">🏥</div><div class="ind-name">Healthcare &amp; Pharma</div></div>
-        <div class="ind-uses">
-          <div class="ind-use">Patient onboarding and appointment management workflows</div>
-          <div class="ind-use">Medical supply procurement and inventory tracking app</div>
-          <div class="ind-use">Clinical compliance documentation — audit-ready, role-gated</div>
-          <div class="ind-use">HR automation — staff scheduling, leave, policy acknowledgements</div>
-          <div class="ind-use">AI-assisted clinical report summarisation and flagging</div>
-        </div>
-      </div>
-    </div>
-    <div class="footnote">
-      <span>KritinAI Technologies Pvt. Ltd. — Use cases delivered across all verticals listed</span>
-    </div>
-  </section>
-
-  <!-- ══ 07 RPA & AI ═══════════════════════════════════════════════════════ -->
-  <section class="slide">
-    <div class="eyebrow">RPA &amp; AI — what we've built</div>
-    <h2 class="u-2bd0f4">Automation that runs without people in the loop.</h2>
-    <div class="cols cols-top">
+    <h2>Loan origination — from 5 days to 4 hours, end to end.</h2>
+    <div class="cols">
       <div>
-        <h3 class="u-6ea032">Robotic Process Automation</h3>
-        <ul class="feat u-0e64e4">
-          <li>Invoice extraction and ERP posting — zero manual keying</li>
-          <li>Bank reconciliation bots — 3,000+ transactions processed daily</li>
-          <li>HR onboarding automation — AD provisioning, email, payroll triggers</li>
-          <li>Regulatory report extraction from legacy banking core systems</li>
-          <li>Vendor statement reconciliation across multiple supplier portals</li>
-        </ul>
-        <h3 class="u-998ef0">Tools deployed</h3>
-        <div class="badge-row u-bccee2">
-          <span class="pill pill-sm">UiPath</span>
-          <span class="pill pill-sm">Automation Anywhere</span>
-          <span class="pill pill-sm">Power Automate Desktop</span>
-          <span class="pill pill-sm">Blue Prism</span>
+        <div class="block">
+          <div class="block-label">The problem</div>
+          <div class="block-body">Loan applications required data collection from 12 different forms, photocopies, and uploaded PDFs — all manually reviewed before processing could begin. KYC checks were done by hand, cross-referencing documents against internal records. A single application took 3–5 working days just to reach the underwriting stage.</div>
         </div>
-      </div>
-      <div>
-        <h3 class="u-c0ef20">AI Implementations</h3>
-        <ul class="feat u-4bed51">
-          <li>AI contract review agent — clause extraction, deviation flagging, routing</li>
-          <li>Intelligent document processing — invoices, KYC, onboarding packs</li>
-          <li>Copilot Studio HR bot — policy Q&amp;A grounded in SharePoint knowledge base</li>
-          <li>Procurement spend intelligence — anomaly detection, vendor recommendations</li>
-          <li>Customer service AI agent — intent classification, CRM write-back</li>
-        </ul>
-        <div class="callout">
-          <p>All AI implementations include data residency controls, no client data into public models, and audit logging throughout — standard on every engagement.</p>
-        </div>
-      </div>
-    </div>
-    <div class="footnote">
-      <span>KritinAI Technologies Pvt. Ltd.</span>
-      <span>Azure OpenAI · Copilot Studio · UiPath · Power Automate</span>
-    </div>
-  </section>
-
-  <!-- ══ 08 SUCCESS STORIES ════════════════════════════════════════════════ -->
-  <section class="slide sand u-b85197">
-    <div class="eyebrow">Customer success stories</div>
-    <h2 class="u-ef7af9">Real outcomes from delivered engagements.</h2>
-    <div class="story-grid">
-
-      <div class="story-card">
-        <div class="story-tag">Manufacturing · Power Platform</div>
-        <div class="story-h">Supplier onboarding transformed from 3-week email process to 4-day automated workflow</div>
-        <div class="story-outcome">
-          <div class="story-kpi"><div class="kv">68%</div><div class="kl">faster onboarding</div></div>
-          <div class="story-kpi"><div class="kv">4d</div><div class="kl">avg cycle time</div></div>
-          <div class="story-kpi"><div class="kv">0</div><div class="kl">lost documents</div></div>
-        </div>
-        <div class="story-body">Built a Canvas App + Power Automate workflow replacing email-based supplier due diligence. Integrated with ERP via Custom Connector. Full audit trail from day one. Procurement team freed from manual follow-up.</div>
-      </div>
-
-      <div class="story-card">
-        <div class="story-tag">BFSI · RPA</div>
-        <div class="story-h">Bank reconciliation automated — from 6 hours daily to 20 minutes with zero errors</div>
-        <div class="story-outcome">
-          <div class="story-kpi"><div class="kv">94%</div><div class="kl">time saved</div></div>
-          <div class="story-kpi"><div class="kv">3k+</div><div class="kl">txns/day</div></div>
-          <div class="story-kpi"><div class="kv">0</div><div class="kl">manual errors</div></div>
-        </div>
-        <div class="story-body">UiPath unattended bot handles daily bank statement extraction, matching, and exception flagging. Exceptions route automatically to the finance team via Power Automate with full context attached.</div>
-      </div>
-
-      <div class="story-card">
-        <div class="story-tag">Logistics · Power BI &amp; ETL</div>
-        <div class="story-h">40+ Excel reports replaced by a live enterprise data platform across 14 offices</div>
-        <div class="story-outcome">
-          <div class="story-kpi"><div class="kv">40+</div><div class="kl">reports gone</div></div>
-          <div class="story-kpi"><div class="kv">14</div><div class="kl">offices live</div></div>
-          <div class="story-kpi"><div class="kv">1</div><div class="kl">source of truth</div></div>
-        </div>
-        <div class="story-body">Azure Data Factory pipelines consolidating data from 6 source systems into a Dataverse-linked Power BI Premium workspace. Management reporting shifted from weekly emails to live dashboards visible on any device.</div>
-      </div>
-
-      <div class="story-card">
-        <div class="story-tag">Legal Tech · AI</div>
-        <div class="story-h">Contract review time cut from 2 hours to 8 seconds per document with AI agent</div>
-        <div class="story-outcome">
-          <div class="story-kpi"><div class="kv">8s</div><div class="kl">per document</div></div>
-          <div class="story-kpi"><div class="kv">90%</div><div class="kl">less review time</div></div>
-          <div class="story-kpi"><div class="kv">100%</div><div class="kl">deviation flagged</div></div>
-        </div>
-        <div class="story-body">Copilot Studio agent backed by Azure OpenAI and Document Intelligence. Extracts key clauses, flags deviations from standard templates, and routes to the right reviewer — no human first-pass required.</div>
-      </div>
-
-    </div>
-    <div class="footnote">
-      <span>KritinAI Technologies Pvt. Ltd. — Full case studies available under NDA</span>
-    </div>
-  </section>
-
-  <!-- ══ 09 SECURITY & GOVERNANCE ══════════════════════════════════════════ -->
-  <section class="slide">
-    <div class="eyebrow">Security &amp; governance</div>
-    <h2 class="u-0a5ef0">Enterprise-grade security. Built in, not bolted on.</h2>
-    <div class="cols cols-top">
-      <div>
-        <div class="gov-grid u-5627ec">
-          <div class="gov-card">
-            <div class="gov-ico">🔐</div>
-            <h3>Role-based access</h3>
-            <p>Azure AD / Entra ID, RBAC, and Dataverse security roles — every user sees only what they're authorised to see.</p>
-          </div>
-          <div class="gov-card">
-            <div class="gov-ico">📋</div>
-            <h3>Full audit logging</h3>
-            <p>Every approval, data change, and exception is logged automatically. Audit evidence is generated, not scrambled for.</p>
-          </div>
-          <div class="gov-card">
-            <div class="gov-ico">🛡</div>
-            <h3>Data Loss Prevention</h3>
-            <p>DLP policies enforced across all Power Platform environments — no unauthorised connectors, no data leakage pathways.</p>
-          </div>
-          <div class="gov-card">
-            <div class="gov-ico">🌍</div>
-            <h3>Data residency</h3>
-            <p>Client data stays within approved environments. No data into public AI models without explicit sign-off and controls.</p>
-          </div>
-          <div class="gov-card">
-            <div class="gov-ico">⚙</div>
-            <h3>ALM pipeline governance</h3>
-            <p>Separate Dev, UAT, and Production environments with controlled promotion. No unreviewed code reaches production.</p>
-          </div>
-          <div class="gov-card">
-            <div class="gov-ico">📁</div>
-            <h3>IP &amp; documentation</h3>
-            <p>All solution artefacts, source code, and documentation are assigned to the client. Nothing leaves without it being yours.</p>
-          </div>
-        </div>
-      </div>
-      <div>
-        <div class="card u-2cac1a">
-          <h3 class="u-79fd52">Standard on every engagement</h3>
-          <ul class="feat u-f8e9a1">
-            <li>NDA signed before any profile or data is shared</li>
-            <li>No subcontracting without written client approval</li>
-            <li>Dedicated resource — not shared across multiple clients</li>
-            <li>Microsoft certifications on file — scans available before engagement</li>
+        <div class="divider"></div>
+        <div class="block">
+          <div class="block-label">What was built</div>
+          <ul class="built-list">
+            <li>Azure Document Intelligence extracting structured data from uploaded KYC documents — Aadhaar, PAN, bank statements — with field-level confidence scoring</li>
+            <li>Copilot Studio agent validating extracted data against internal CRM and bureau records, flagging discrepancies automatically</li>
+            <li>Power Automate orchestrating the full origination workflow: document intake → KYC → credit check → underwriting queue</li>
+            <li>Real-time applicant status portal replacing email follow-ups for both applicants and relationship managers</li>
           </ul>
         </div>
         <div class="callout">
-          <p>Power Platform and other Microsoft licenses are to be procured directly by the client. KritinAI will advise on requirements but does not resell licenses.</p>
+          <p>Underwriting team now receives complete, validated dossiers — not raw document piles. Decisions are faster because the work before the decision is already done.</p>
         </div>
       </div>
-    </div>
-    <div class="footnote">
-      <span>KritinAI Technologies Pvt. Ltd.</span>
-      <span>Security-first delivery · ISO 27001:2022 certified</span>
-    </div>
-  </section>
-
-  <!-- ══ 10 KPIs & SUCCESS METRICS ════════════════════════════════════════ -->
-  <section class="slide sand">
-    <div class="eyebrow">How we measure success</div>
-    <h2 class="u-a5a313">KPIs we track from day one.</h2>
-    <div class="kpi-section">
-      <div class="kpi-label">Adoption &amp; engagement</div>
-      <div class="kpi-row u-239aff">
+      <div class="kpi-stack">
         <div class="kpi-card">
-          <div class="kpi-num">95<span class="kpi-unit">%</span></div>
-          <div class="kpi-desc">Target active user adoption within 60 days of go-live</div>
-        </div>
-        <div class="kpi-card">
-          <div class="kpi-num">&lt;2<span class="kpi-unit">%</span></div>
-          <div class="kpi-desc">Process fallback rate — users returning to email or spreadsheets</div>
-        </div>
-        <div class="kpi-card">
-          <div class="kpi-num">↓70<span class="kpi-unit">%</span></div>
-          <div class="kpi-desc">Reduction in support tickets related to the replaced process</div>
-        </div>
-        <div class="kpi-card">
-          <div class="kpi-num">&lt;5<span class="kpi-unit">d</span></div>
-          <div class="kpi-desc">Target time to trained and confident for new users on any solution</div>
-        </div>
-      </div>
-    </div>
-    <div class="kpi-section">
-      <div class="kpi-label">Productivity &amp; efficiency</div>
-      <div class="kpi-row u-d9b2cb">
-        <div class="kpi-card">
-          <div class="kpi-num">↓70<span class="kpi-unit">%</span></div>
-          <div class="kpi-desc">Approval turnaround time from submission to decision</div>
-        </div>
-        <div class="kpi-card">
-          <div class="kpi-num">↓85<span class="kpi-unit">%</span></div>
-          <div class="kpi-desc">Manual effort hours on processes that are fully automated</div>
-        </div>
-        <div class="kpi-card">
-          <div class="kpi-num">↓90<span class="kpi-unit">%</span></div>
-          <div class="kpi-desc">Data entry errors eliminated by system-to-system automation</div>
-        </div>
-        <div class="kpi-card">
-          <div class="kpi-num">↑40<span class="kpi-unit">%</span></div>
-          <div class="kpi-desc">Staff time redirected from processing to value-added decision-making</div>
-        </div>
-      </div>
-    </div>
-    <div class="kpi-section">
-      <div class="kpi-label">Business &amp; cost impact</div>
-      <div class="kpi-row">
-        <div class="kpi-card">
-          <div class="kpi-num">↓40<span class="kpi-unit">%</span></div>
-          <div class="kpi-desc">Operational cost reduction on automated process areas</div>
-        </div>
-        <div class="kpi-card">
-          <div class="kpi-num">6<span class="kpi-unit">wk</span></div>
-          <div class="kpi-desc">Average time to first production go-live from engagement start</div>
-        </div>
-        <div class="kpi-card">
-          <div class="kpi-num">100<span class="kpi-unit">%</span></div>
-          <div class="kpi-desc">Audit trail coverage — every action logged and reportable</div>
-        </div>
-        <div class="kpi-card">
-          <div class="kpi-num">&lt;6<span class="kpi-unit">mo</span></div>
-          <div class="kpi-desc">Typical ROI breakeven on Power Platform automation engagements</div>
-        </div>
-      </div>
-    </div>
-    <div class="footnote">
-      <span>KritinAI Technologies Pvt. Ltd. — KPIs agreed and tracked per engagement</span>
-    </div>
-  </section>
-
-  <!-- ══ 11 WHY KRITINAI — COMPARISON ══════════════════════════════════════ -->
-  <section class="slide">
-    <div class="eyebrow">Why KritinAI</div>
-    <h2 class="u-2fc418">Accelerators, expertise, and speed — compared.</h2>
-    <table class="cmp-table">
-      <thead>
-        <tr>
-          <th>Capability</th>
-          <th>KritinAI</th>
-          <th>Build in-house</th>
-          <th>Large SI / Big Four</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Time to first go-live</td>
-          <td>⚡ 4–6 weeks</td>
-          <td class="cmp-no">3–6 months (hiring + ramp)</td>
-          <td class="cmp-part">2–4 months (SOW overhead)</td>
-        </tr>
-        <tr>
-          <td>Pre-built accelerators &amp; templates</td>
-          <td><span class="cmp-yes">Yes</span> — reusable app, flow &amp; ETL components</td>
-          <td class="cmp-no">Built from scratch each time</td>
-          <td class="cmp-part">Partial — often proprietary, locked-in</td>
-        </tr>
-        <tr>
-          <td>Domain expertise (BFSI, FMCG, Supply Chain)</td>
-          <td><span class="cmp-yes">Deep</span> — 20+ yrs in regulated industries</td>
-          <td class="cmp-no">Depends on hiring luck</td>
-          <td class="cmp-part">Available but rotated out frequently</td>
-        </tr>
-        <tr>
-          <td>Dedicated resource (not shared)</td>
-          <td><span class="cmp-yes">Always</span> — one resource, one client</td>
-          <td class="cmp-yes">Yes (internal hire)</td>
-          <td class="cmp-no">Often shared across accounts</td>
-        </tr>
-        <tr>
-          <td>Solution Architect oversight</td>
-          <td><span class="cmp-yes">Included</span> — backstop on every engagement</td>
-          <td class="cmp-no">Separate senior hire required</td>
-          <td class="cmp-part">Included but billed at senior rates</td>
-        </tr>
-        <tr>
-          <td>Replacement guarantee</td>
-          <td><span class="cmp-yes">1 month</span> — no conditions</td>
-          <td class="cmp-no">Full re-hire process (3–6 months)</td>
-          <td class="cmp-no">Contract renegotiation required</td>
-        </tr>
-        <tr>
-          <td>Cost (India market)</td>
-          <td><span class="cmp-yes">From ₹80,000/month</span></td>
-          <td class="cmp-part">₹1–2L/month + benefits + overhead</td>
-          <td class="cmp-no">3–5× the rate for equivalent output</td>
-        </tr>
-      </tbody>
-    </table>
-    <div class="footnote">
-      <span>KritinAI Technologies Pvt. Ltd.</span>
-      <span>Accelerators · Domain expertise · Guaranteed delivery</span>
-    </div>
-  </section>
-
-  <!-- ══ 12 TWO ENGAGEMENT MODELS ═══════════════════════════════════════════ -->
-  <section class="slide sand">
-    <div class="eyebrow">How we engage</div>
-    <h2 class="u-0774bd">Two ways to work with us.</h2>
-    <div class="cols u-dc19fb">
-      <div class="card u-91901c">
-        <div class="u-6d32aa">
-          <div class="ico u-c2ebe1">🏗</div>
-          <div>
-            <h3 class="u-10c4c1">Model A — We build it for you</h3>
-            <div class="u-979cf6">Project delivery with full ownership</div>
+          <div class="kpi-num">95<span class="unit">%</span></div>
+          <div class="kpi-txt">
+            <div class="kv">Faster origination</div>
+            <div class="kl">5 days → 4 hours end-to-end</div>
           </div>
         </div>
-        <ul class="feat u-7f2e20">
-          <li>KritinAI owns scope, delivery, and quality end to end</li>
-          <li>Fixed-price, T&amp;M, or milestone-based commercial model</li>
-          <li>Solution Architect assigned to every project</li>
-          <li>Dev → UAT → Production handover with full documentation</li>
-          <li>Your internal team is trained before we exit</li>
-        </ul>
-        <div class="callout">
-          <p>Best when: you have use cases defined and want a firm to own delivery and accountability.</p>
-        </div>
-      </div>
-      <div class="card u-4069e1">
-        <div class="u-6e551c">
-          <div class="ico u-578e68">👥</div>
-          <div>
-            <h3 class="u-69bdda">Model B — We supply the developer, you manage</h3>
-            <div class="u-1e7665">Dedicated resource deployment</div>
+        <div class="kpi-card gold">
+          <div class="kpi-num">91<span class="unit">%</span></div>
+          <div class="kpi-txt">
+            <div class="kv">Reduction in manual data entry</div>
+            <div class="kl">Documents processed by AI, not staff</div>
           </div>
         </div>
-        <ul class="feat u-2f0d3e">
-          <li>You specify the role — developer, tester, architect, BA</li>
-          <li>KritinAI shortlists 2–3 pre-vetted profiles for your review</li>
-          <li>You interview and select the resource you want</li>
-          <li>NDA signed before any profile is shared</li>
-          <li>Resource works under your direction, day to day</li>
-          <li>KritinAI backstop: CoE oversight + 1-month replacement guarantee</li>
-        </ul>
-        <div class="callout u-a9664a">
-          <p>Best when: you have the technical capacity to manage but need the right people, fast.</p>
+        <div class="kpi-card green">
+          <div class="kpi-num">3×</div>
+          <div class="kpi-txt">
+            <div class="kv">Daily application throughput</div>
+            <div class="kl">Same team, same headcount</div>
+          </div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-num">100<span class="unit">%</span></div>
+          <div class="kpi-txt">
+            <div class="kv">Audit trail on every application</div>
+            <div class="kl">Every decision logged, every document timestamped</div>
+          </div>
         </div>
       </div>
     </div>
     <div class="footnote">
-      <span>KritinAI Technologies Pvt. Ltd.</span>
-      <span>Minimum engagement: 6 months billing per resource</span>
+      <span>KritinAI Technologies Pvt. Ltd. · Full case study available under NDA</span>
     </div>
   </section>
 
-  <!-- ══ 13 TALENT SOURCING PROCESS ════════════════════════════════════════ -->
-  <section class="slide">
-    <div class="eyebrow">How we source</div>
-    <h2 class="u-6c1a9d">Interview responsibility stays with KritinAI.</h2>
-    <div class="cols cols-top u-68915f">
-      <div>
-        <div class="step">
-          <div class="num">1</div>
-          <div><h3>You share the requirement</h3><p>Role type, experience level, skills needed, and start timeline. No headcount commitment required at this stage.</p></div>
-        </div>
-        <div class="step">
-          <div class="num">2</div>
-          <div><h3>KritinAI screens and shortlists</h3><p>We handle sourcing, technical screening, and interviews. You receive 2–3 pre-vetted profiles — not a pile of CVs.</p></div>
-        </div>
-        <div class="step">
-          <div class="num">3</div>
-          <div><h3>NDA signed, then profiles shared</h3><p>No profile is shared before an NDA is in place. All candidate data handled under ISO 27001 controls.</p></div>
-        </div>
-        <div class="step">
-          <div class="num">4</div>
-          <div><h3>You select, we onboard</h3><p>You interview and choose. KritinAI handles onboarding, tool access, and orientation within days of selection.</p></div>
-        </div>
-      </div>
-      <div>
-        <div class="card u-9c6c2c">
-          <h3 class="u-0e1e9e">Roles we field</h3>
-          <div class="badge-row u-dab64a">
-            <span class="pill pill-sm">Power Apps Developer</span>
-            <span class="pill pill-sm">Power Automate Developer</span>
-            <span class="pill pill-sm">Power BI / ETL Developer</span>
-            <span class="pill pill-sm">RPA Developer</span>
-            <span class="pill pill-sm">Full-Stack Developer</span>
-            <span class="pill pill-sm">AI / ML Engineer</span>
-            <span class="pill pill-sm">QA / Test Engineer</span>
-            <span class="pill pill-sm">Solution Architect</span>
-            <span class="pill pill-sm">Business Analyst</span>
-            <span class="pill pill-sm">Azure Cloud Engineer</span>
-          </div>
-        </div>
-        <div class="callout">
-          <p>KritinAI is accountable for the quality of who we put forward. If the resource isn't working, we replace within one month — no arguments, no re-negotiation.</p>
-        </div>
-      </div>
-    </div>
-    <div class="footnote">
-      <span>KritinAI Technologies Pvt. Ltd.</span>
-      <span>NDA · ISO 27001 data handling · 1-month replacement guarantee</span>
-    </div>
-  </section>
-
-  <!-- ══ 14 COMMERCIAL & TERMS ══════════════════════════════════════════════ -->
+  <!-- ══ 06 MANUFACTURING — Supplier Onboarding ════════════════════════ -->
   <section class="slide sand">
-    <div class="eyebrow">Commercial framework</div>
-    <h2 class="u-215ea3">Transparent terms, no surprises.</h2>
-    <div class="cols cols-top u-c2632d">
+    <div class="cs-index">Manufacturing · 01 / 01</div>
+    <div class="ind-tag">
+      <span class="sector">Manufacturing</span>
+      <span class="tech">Power Apps · Power Automate · Custom Connector · ERP</span>
+    </div>
+    <h2>Supplier onboarding — from a 3-week email process to a 4-day automated workflow.</h2>
+    <div class="cols">
       <div>
-        <div class="step">
-          <div class="num u-4dd79b">₹</div>
-          <div><h3>Rates from ₹80,000/month</h3><p>Starting rate per resource per month. Final rate depends on role, experience level, and technology specialisation — agreed before engagement.</p></div>
+        <div class="block">
+          <div class="block-label">The problem</div>
+          <div class="block-body">Onboarding a new supplier took 3 weeks on average — a sequence of emails, document requests, manual due diligence checks, and approval chains spread across the procurement, finance, and legal teams. Documents were lost in inboxes; approvals stalled without visibility. New supplier delays were delaying production timelines.</div>
         </div>
-        <div class="step">
-          <div class="num">6</div>
-          <div><h3>Minimum 6-month billing per resource</h3><p>Ensures continuity of delivery and allows the resource to build deep context on your environment and processes.</p></div>
-        </div>
-        <div class="step">
-          <div class="num">1</div>
-          <div><h3>1-month replacement guarantee</h3><p>If a resource isn't working for any reason, raise it with us. Replacement is handled within one month at no additional cost.</p></div>
-        </div>
-      </div>
-      <div>
-        <div class="card u-4802dc">
-          <h3 class="u-ebb01f">Standard terms — every engagement</h3>
-          <ul class="feat u-323b38">
-            <li>NDA signed before any profile or data is shared</li>
-            <li>IP and all deliverables assigned to client on exit</li>
-            <li>No subcontracting without written client approval</li>
-            <li>Resource dedicated — not shared across multiple clients</li>
-            <li>Data protection: client data within approved tools only</li>
-            <li>Full handover documentation before engagement closes</li>
+        <div class="divider"></div>
+        <div class="block">
+          <div class="block-label">What was built</div>
+          <ul class="built-list">
+            <li>Canvas App for supplier self-registration — uploads documents, fills compliance information, and tracks their own onboarding status</li>
+            <li>Power Automate multi-stage approval flow across procurement, finance, and legal — parallel approvals where possible, sequential where required</li>
+            <li>Custom Connector pushing approved supplier data directly into the client's ERP — no re-keying, no delay</li>
+            <li>Full audit trail from first submission to ERP activation, with document version history retained</li>
           </ul>
         </div>
-        <div class="callout u-9ba7f3">
-          <p>Out of scope: Power Platform, Power BI, and Microsoft software licenses are to be procured directly by the client. KritinAI will advise on requirements but does not resell licenses.</p>
+        <div class="callout green">
+          <p>The procurement team went from chasing emails to reviewing dashboards. New suppliers are production-ready in days, not weeks.</p>
+        </div>
+      </div>
+      <div class="kpi-stack">
+        <div class="kpi-card">
+          <div class="kpi-num">68<span class="unit">%</span></div>
+          <div class="kpi-txt">
+            <div class="kv">Faster onboarding</div>
+            <div class="kl">3 weeks → 4 days average cycle time</div>
+          </div>
+        </div>
+        <div class="kpi-card gold">
+          <div class="kpi-num">4<span class="unit">d</span></div>
+          <div class="kpi-txt">
+            <div class="kv">Average cycle time post go-live</div>
+            <div class="kl">Down from 21 days</div>
+          </div>
+        </div>
+        <div class="kpi-card green">
+          <div class="kpi-num">0</div>
+          <div class="kpi-txt">
+            <div class="kv">Lost documents</div>
+            <div class="kl">Every submission stored, versioned, auditable</div>
+          </div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-num">100<span class="unit">%</span></div>
+          <div class="kpi-txt">
+            <div class="kv">ERP sync automated</div>
+            <div class="kl">No manual re-entry on approval</div>
+          </div>
         </div>
       </div>
     </div>
     <div class="footnote">
-      <span>KritinAI Technologies Pvt. Ltd.</span>
-      <span>connectus@kritinai.com · +91 8446878088</span>
+      <span>KritinAI Technologies Pvt. Ltd. · Full case study available under NDA</span>
     </div>
   </section>
 
-  <!-- ══ 15 CLOSING ════════════════════════════════════════════════════════ -->
+  <!-- ══ 07 IT — Legacy Modernisation ════════════════════════════════════ -->
+  <section class="slide">
+    <div class="cs-index">IT · 01 / 01</div>
+    <div class="ind-tag">
+      <span class="sector">IT Services</span>
+      <span class="tech">Custom Development · .NET · React · Azure · Microservices</span>
+    </div>
+    <h2>Legacy system modernised — monolith to cloud-native in 14 weeks.</h2>
+    <div class="cols">
+      <div>
+        <div class="block">
+          <div class="block-label">The problem</div>
+          <div class="block-body">A 12-year-old on-premises .NET monolith was processing all core operations — billing, client records, reporting — for a 400-person IT services firm. The system had no APIs, no mobile access, and required a dedicated server room. Deployments took a weekend. Any new feature request took months. The business had outgrown the platform entirely.</div>
+        </div>
+        <div class="divider"></div>
+        <div class="block">
+          <div class="block-label">What was built</div>
+          <ul class="built-list">
+            <li>Decomposed the monolith into domain-bounded microservices on Azure — billing, client management, and reporting running as independent, deployable units</li>
+            <li>React frontend replacing the old desktop client — fully browser-based, mobile-responsive, accessible from any device without VPN</li>
+            <li>REST API layer exposing all core functions — enabling third-party integrations the old system could never support</li>
+            <li>Zero-downtime migration strategy: parallel-run period with data sync before cutover — no weekend outage, no data loss</li>
+          </ul>
+        </div>
+        <div class="callout green">
+          <p>The team went from monthly deployments to deploying multiple times a week. New features that used to take 3 months now ship in 2–3 weeks.</p>
+        </div>
+      </div>
+      <div class="kpi-stack">
+        <div class="kpi-card">
+          <div class="kpi-num">14<span class="unit">wk</span></div>
+          <div class="kpi-txt">
+            <div class="kv">Full migration completed</div>
+            <div class="kl">Monolith to cloud-native, zero downtime</div>
+          </div>
+        </div>
+        <div class="kpi-card gold">
+          <div class="kpi-num">8×</div>
+          <div class="kpi-txt">
+            <div class="kv">Faster deployment cycles</div>
+            <div class="kl">Monthly releases → multiple per week</div>
+          </div>
+        </div>
+        <div class="kpi-card green">
+          <div class="kpi-num">60<span class="unit">%</span></div>
+          <div class="kpi-txt">
+            <div class="kv">Reduction in infrastructure cost</div>
+            <div class="kl">On-prem server room decommissioned</div>
+          </div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-num">0</div>
+          <div class="kpi-txt">
+            <div class="kv">Data loss on cutover</div>
+            <div class="kl">Parallel-run sync strategy — clean switchover</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footnote">
+      <span>KritinAI Technologies Pvt. Ltd. · Full case study available under NDA</span>
+    </div>
+  </section>
+
+  <!-- ══ 08 CLOSING ════════════════════════════════════════════════════ -->
   <section class="slide hero">
-    <div class="u-1a3245">
+    <div style="margin:auto 0; position:relative; z-index:1; max-width:58ch;">
       <div class="eyebrow">Ready when you are</div>
-      <h1>Let's talk about<br/><span class="u-030cb7">what you're building.</span></h1>
-      <p class="tag">Tell us what your team is working on. We'll tell you honestly whether we're the right fit — and how we'd approach it.</p>
+      <h1>What would this look<br/><span style="color:var(--warn);">like for your team?</span></h1>
+      <p class="tag">Every engagement starts with understanding what's slowing your team down. Tell us — and we'll tell you honestly what we can fix and how long it'll take.</p>
     </div>
-    <div class="u-467d74">
-      <span class="u-37a06c">KritinAI Technologies Pvt. Ltd. · Pune, India</span>
-      <span class="u-0502fe">CIN: U62020PN2025PTC245276 · GSTIN: 27AAMCK1105B1Z2</span>
+    <div style="position:absolute; bottom:0; left:0; right:0; background:var(--green-800); padding:1.1rem 7vw; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:.5rem;">
+      <span style="color:var(--terra-100); font-size:.88rem; font-weight:600;">KritinAI Technologies Pvt. Ltd. · Pune, India</span>
+      <span style="color:var(--terra); font-size:.88rem; font-weight:700;">connectus@kritinai.com · +91 8446878088 · www.kritinai.com</span>
+      <span style="color:var(--muted); font-size:.78rem;">Full case studies available under NDA</span>
     </div>
   </section>
 
 </div><!-- /.deck -->
 
-<div class="counter" id="counter">1 / 15</div>
+<div class="counter" id="counter">1 / 8</div>
 <div class="nav">
-  <button id="prevBtn">&#8249;</button>
-  <button id="nextBtn">&#8250;</button>
+  <button onclick="show(i-1)">&#8249;</button>
+  <button onclick="show(i+1)">&#8250;</button>
 </div>
 
-<script src="app.js"></script>
+<script>
+  const slides = document.querySelectorAll('.slide');
+  const total  = slides.length;
+  let i = 0;
+
+  function show(n) {
+    slides[i].classList.remove('active');
+    i = (n + total) % total;
+    slides[i].classList.add('active');
+    document.getElementById('counter').textContent  = (i + 1) + ' / ' + total;
+    document.getElementById('progress').style.width = ((i + 1) / total * 100) + '%';
+  }
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') show(i + 1);
+    if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')   show(i - 1);
+  });
+
+  let _tx = 0;
+  document.addEventListener('touchstart', e => { _tx = e.touches[0].clientX; }, {passive:true});
+  document.addEventListener('touchend',   e => {
+    const dx = _tx - e.changedTouches[0].clientX;
+    if (Math.abs(dx) > 48) dx > 0 ? show(i + 1) : show(i - 1);
+  }, {passive:true});
+
+  show(0);
+</script>
 </body>
 </html>
-
