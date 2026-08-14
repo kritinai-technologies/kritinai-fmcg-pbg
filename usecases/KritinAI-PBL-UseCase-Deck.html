@@ -1,0 +1,1596 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>KritinAI × Phoenix Beverages — Use Cases &amp; Track Record</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700;9..40,800;9..40,900&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --green-900: #060F1A;
+    --green-800: #0F1C2D;
+    --green-700: #1A2E4A;
+    --green-600: #243F6B;
+    --green-400: #38BDF8;
+    --green-200: #BAE6FD;
+    --green-100: rgba(56,189,248,.22);
+    --green-50:  rgba(56,189,248,.09);
+    --terra:     #38BDF8;
+    --terra-100: #BAE6FD;
+    --terra-50:  rgba(56,189,248,.08);
+    --sand:   #0F1C2D;
+    --ink:    #F0F6FF;
+    --charcoal: #D1E0F0;
+    --muted:  #94A3B8;
+    --line:   rgba(56,189,248,.18);
+    --good:    #22C55E;
+    --good-50: rgba(34,197,94,.12);
+    --warn:    #F59E0B;
+    --warn-50: rgba(245,158,11,.12);
+    --bad:     #EF4444;
+    --uc1: #38BDF8;
+    --uc2: #F59E0B;
+    --uc3: #22C55E;
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html, body { height:100%; }
+  body { font-family:"DM Sans",-apple-system,sans-serif; color:var(--charcoal); background:#0A1525; -webkit-font-smoothing:antialiased; letter-spacing:-.005em; }
+
+  .deck { height:100vh; overflow:hidden; }
+  .slide { display:none; height:100vh; width:100vw; padding:6vh 7vw; flex-direction:column; justify-content:center; position:relative; background:var(--green-700); overflow:hidden; }
+  .slide.active { display:flex; }
+  .slide.sand   { background:var(--sand); }
+  .slide.dark   { background:var(--green-900); }
+  .slide::before { content:''; position:absolute; top:0; left:0; right:0; height:3px; background:linear-gradient(90deg,var(--terra) 0%,#2563EB 50%,var(--warn) 100%); z-index:2; }
+
+  /* Section dividers get a coloured band */
+  .slide.divider::before { height:100%; width:4px; top:0; right:auto; left:0; background:var(--section-color, var(--terra)); }
+  .slide.hero { background: radial-gradient(120% 80% at 78% 18%,rgba(56,189,248,.10) 0%,rgba(56,189,248,0) 55%), radial-gradient(90% 70% at 12% 92%,rgba(245,158,11,.07) 0%,rgba(245,158,11,0) 50%), #1A2E4A; }
+
+  .eyebrow { text-transform:uppercase; letter-spacing:.18em; font-size:.78rem; font-weight:700; color:var(--terra); margin-bottom:1.1rem; }
+  h1 { font-size:4.2rem; line-height:1.04; font-weight:800; color:#fff; letter-spacing:-.03em; }
+  h2 { font-size:2.7rem; line-height:1.08; font-weight:800; color:#fff; letter-spacing:-.02em; margin-bottom:1.4rem; }
+  h3 { font-size:1.2rem; font-weight:700; color:var(--green-200); letter-spacing:-.01em; }
+  p  { font-size:1.22rem; line-height:1.6; color:var(--charcoal); max-width:62ch; }
+  p.lead { font-size:1.5rem; line-height:1.5; color:var(--muted); max-width:54ch; }
+  .hero h1 { font-size:4.7rem; }
+  .hero .tag { font-size:1.45rem; color:var(--green-200); margin-top:1.4rem; max-width:52ch; line-height:1.45; }
+  .muted { color:var(--muted); }
+
+  .cols   { display:grid; grid-template-columns:1.05fr .95fr; gap:3rem; align-items:center; }
+  .cols-top { align-items:start; }
+  .cols-2 { display:grid; grid-template-columns:1fr 1fr; gap:1.3rem; margin-top:.4rem; }
+  .cols-3 { display:grid; grid-template-columns:repeat(3,1fr); gap:1.3rem; margin-top:.4rem; }
+
+  .card { background:rgba(255,255,255,.055); border:1px solid var(--line); border-radius:16px; padding:1.5rem 1.45rem; box-shadow:0 1px 8px rgba(0,0,0,.18); }
+  .slide.sand .card { background:rgba(255,255,255,.07); }
+  .card .ico { width:44px; height:44px; border-radius:11px; background:rgba(56,189,248,.12); color:var(--terra); display:grid; place-items:center; font-size:1.35rem; margin-bottom:.85rem; }
+  .card h3 { margin-bottom:.4rem; color:#fff; }
+  .card p  { font-size:1.02rem; color:var(--muted); line-height:1.5; }
+
+  .pill    { display:inline-flex; align-items:center; background:rgba(56,189,248,.10); color:var(--terra); border:1px solid rgba(56,189,248,.28); border-radius:999px; padding:.4rem 1rem; font-size:.95rem; font-weight:600; }
+  .pill-sm { font-size:.74rem; padding:.22rem .65rem; }
+  .pill-warn { background:rgba(245,158,11,.12); color:var(--warn); border-color:rgba(245,158,11,.35); }
+  .pill-good { background:rgba(34,197,94,.11); color:var(--good); border-color:rgba(34,197,94,.28); }
+  .badge-row { display:flex; flex-wrap:wrap; gap:.7rem; margin-top:1.6rem; }
+
+  .step { display:flex; gap:1.1rem; align-items:flex-start; margin-bottom:1.25rem; }
+  .step .num { flex:none; width:46px; height:46px; border-radius:12px; background:rgba(56,189,248,.14); border:1px solid rgba(56,189,248,.35); color:var(--terra); display:grid; place-items:center; font-weight:800; font-size:1.2rem; }
+  .step h3 { margin-bottom:.15rem; color:#fff; }
+  .step p  { font-size:1.08rem; color:var(--muted); }
+
+  ul.feat { list-style:none; margin-top:.4rem; }
+  ul.feat li { font-size:1.02rem; padding:.45rem 0 .45rem 2rem; position:relative; color:var(--charcoal); }
+  ul.feat li::before { content:"✓"; position:absolute; left:0; color:var(--green-400); font-weight:800; }
+  ul.cross li::before { content:"✕"; color:var(--bad); }
+  ul.arrow li::before { content:"→"; color:var(--terra); }
+
+  .stat { background:rgba(255,255,255,.05); border:1px solid var(--line); border-radius:18px; padding:1.6rem 1.5rem; }
+  .stat .big  { font-size:3.4rem; font-weight:900; color:var(--terra); line-height:1; letter-spacing:-.04em; }
+  .stat .big .unit { font-size:1.6rem; font-weight:800; color:var(--warn); }
+  .stat .lbl  { margin-top:.6rem; font-size:1rem; color:var(--muted); line-height:1.4; }
+  .stat.feature { background:rgba(56,189,248,.12); border-color:rgba(56,189,248,.3); }
+  .stat.feature .big { color:var(--terra); }
+  .stat.feature .lbl { color:var(--green-200); }
+  .stat.gold { background:rgba(245,158,11,.10); border-color:rgba(245,158,11,.3); }
+  .stat.gold .big { color:var(--warn); }
+  .stat.gold .lbl { color:#FDE68A; }
+  .stat.green { background:rgba(34,197,94,.10); border-color:rgba(34,197,94,.3); }
+  .stat.green .big { color:var(--good); }
+  .stat.green .lbl { color:#BBF7D0; }
+
+  .callout { border-left:4px solid var(--terra); background:rgba(56,189,248,.07); border-radius:0 14px 14px 0; padding:1.1rem 1.3rem; }
+  .callout p { font-size:1.05rem; color:#fff; font-weight:600; line-height:1.55; margin:0; max-width:none; }
+  .callout.warn { border-color:var(--warn); background:rgba(245,158,11,.07); }
+  .callout.good { border-color:var(--good); background:rgba(34,197,94,.07); }
+
+  /* Challenge/outcome cards */
+  .ch-card { background:rgba(239,68,68,.07); border:1px solid rgba(239,68,68,.22); border-radius:14px; padding:1.1rem 1.2rem; }
+  .ch-card .ico { font-size:1.6rem; margin-bottom:.6rem; }
+  .ch-card h3 { font-size:1rem; color:#fff; margin-bottom:.3rem; }
+  .ch-card p  { font-size:.88rem; color:var(--muted); line-height:1.45; }
+
+  /* Architecture flow */
+  .flow { display:flex; align-items:center; gap:0; margin:1rem 0; flex-wrap:wrap; }
+  .flow-box { background:rgba(255,255,255,.07); border:1px solid var(--line); border-radius:12px; padding:.7rem 1rem; text-align:center; flex:1; min-width:0; }
+  .flow-box .fb-ico { font-size:1.4rem; margin-bottom:.3rem; }
+  .flow-box .fb-title { font-size:.82rem; font-weight:700; color:#fff; line-height:1.3; }
+  .flow-box .fb-sub { font-size:.7rem; color:var(--muted); margin-top:.2rem; line-height:1.3; }
+  .flow-box.highlight { background:rgba(56,189,248,.14); border-color:rgba(56,189,248,.45); }
+  .flow-box.highlight .fb-title { color:var(--terra); }
+  .flow-arrow { color:var(--terra); font-size:1.3rem; flex:none; padding:0 .4rem; font-weight:700; }
+
+  /* Before/after */
+  .ba-grid { display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-top:.6rem; }
+  .ba-before { background:rgba(239,68,68,.06); border:1px solid rgba(239,68,68,.2); border-radius:14px; padding:1rem 1.1rem; }
+  .ba-after  { background:rgba(34,197,94,.06); border:1px solid rgba(34,197,94,.2); border-radius:14px; padding:1rem 1.1rem; }
+  .ba-label  { font-size:.72rem; font-weight:700; text-transform:uppercase; letter-spacing:.1em; margin-bottom:.6rem; }
+  .ba-before .ba-label { color:var(--bad); }
+  .ba-after  .ba-label { color:var(--good); }
+  .ba-item   { font-size:.9rem; color:var(--charcoal); padding:.3rem 0; border-bottom:1px solid rgba(255,255,255,.05); line-height:1.45; }
+  .ba-item:last-child { border-bottom:none; }
+
+  /* Phase timeline */
+  .phase-track { display:grid; grid-template-columns:repeat(3,1fr); gap:1rem; margin-top:.7rem; }
+  .phase-card { border-radius:14px; padding:1.1rem 1.2rem; position:relative; }
+  .phase-card.p1 { background:rgba(56,189,248,.09); border:1px solid rgba(56,189,248,.3); }
+  .phase-card.p2 { background:rgba(245,158,11,.09); border:1px solid rgba(245,158,11,.3); }
+  .phase-card.p3 { background:rgba(34,197,94,.09); border:1px solid rgba(34,197,94,.3); }
+  .phase-num { font-size:.72rem; font-weight:700; text-transform:uppercase; letter-spacing:.12em; margin-bottom:.4rem; }
+  .phase-card.p1 .phase-num { color:var(--terra); }
+  .phase-card.p2 .phase-num { color:var(--warn); }
+  .phase-card.p3 .phase-num { color:var(--good); }
+  .phase-title { font-size:1rem; font-weight:800; color:#fff; margin-bottom:.5rem; line-height:1.3; }
+  .phase-weeks { font-size:.75rem; color:var(--muted); font-family:"DM Mono",monospace; margin-bottom:.6rem; }
+  .phase-items { font-size:.83rem; color:var(--charcoal); line-height:1.6; }
+
+  /* Role card */
+  .role-card { background:rgba(255,255,255,.05); border:1px solid var(--line); border-radius:14px; padding:1rem 1.15rem; }
+  .role-title { font-size:.95rem; font-weight:800; color:#fff; margin-bottom:.3rem; }
+  .role-exp { font-size:.75rem; color:var(--terra); font-weight:700; margin-bottom:.5rem; }
+  .role-items { font-size:.82rem; color:var(--muted); line-height:1.6; }
+
+  /* Section banner (divider slide) */
+  .section-banner { display:flex; flex-direction:column; justify-content:center; }
+  .section-num { font-size:8rem; font-weight:900; color:rgba(255,255,255,.04); line-height:1; letter-spacing:-.05em; position:absolute; right:7vw; top:50%; transform:translateY(-50%); }
+  .section-tag { font-size:.78rem; font-weight:700; text-transform:uppercase; letter-spacing:.18em; margin-bottom:1rem; }
+  .section-h { font-size:3.5rem; font-weight:900; line-height:1.08; color:#fff; letter-spacing:-.03em; max-width:16ch; }
+  .section-sub { font-size:1.2rem; color:var(--muted); margin-top:.9rem; max-width:40ch; line-height:1.5; }
+
+  /* Data model */
+  .dm-center { background:rgba(56,189,248,.12); border:2px solid rgba(56,189,248,.4); border-radius:16px; padding:.9rem 1.2rem; text-align:center; }
+  .dm-center .dm-title { font-size:.9rem; font-weight:800; color:var(--terra); }
+  .dm-center .dm-sub   { font-size:.72rem; color:var(--green-200); margin-top:.2rem; }
+  .dm-spoke { background:rgba(255,255,255,.06); border:1px solid var(--line); border-radius:12px; padding:.7rem 1rem; }
+  .dm-spoke .dm-title  { font-size:.82rem; font-weight:700; color:#fff; }
+  .dm-spoke .dm-sub    { font-size:.7rem; color:var(--muted); margin-top:.15rem; line-height:1.4; }
+
+  /* App mockup panel */
+  .app-mock { background:rgba(255,255,255,.05); border:1px solid var(--line); border-radius:16px; padding:1rem 1.1rem; }
+  .app-mock .am-bar { background:rgba(255,255,255,.07); border-radius:8px; padding:.4rem .8rem; font-size:.75rem; font-weight:700; color:var(--terra); margin-bottom:.75rem; display:flex; align-items:center; gap:.5rem; }
+  .app-mock .am-field { background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.1); border-radius:8px; padding:.45rem .8rem; margin-bottom:.45rem; font-size:.82rem; color:var(--charcoal); }
+  .app-mock .am-field span { color:var(--muted); font-size:.72rem; display:block; }
+  .app-mock .am-field strong { color:#fff; }
+  .app-mock .am-btn { background:var(--terra); color:#0A1525; font-weight:800; font-size:.82rem; border-radius:8px; padding:.55rem 1rem; text-align:center; margin-top:.6rem; }
+  .app-mock .am-scan { background:rgba(56,189,248,.12); border:2px dashed rgba(56,189,248,.4); border-radius:10px; text-align:center; padding:.8rem; color:var(--terra); font-size:.82rem; font-weight:700; margin-bottom:.5rem; }
+
+  /* KPI inline */
+  .kpi-inline { display:flex; gap:1.5rem; flex-wrap:wrap; margin-top:.8rem; }
+  .ki { text-align:center; }
+  .ki-num { font-size:2.8rem; font-weight:900; color:var(--terra); line-height:1; letter-spacing:-.04em; }
+  .ki-lbl { font-size:.78rem; color:var(--muted); margin-top:.2rem; max-width:10ch; line-height:1.3; }
+
+  /* Chrome */
+  .footnote { position:absolute; bottom:3.2vh; left:7vw; right:7vw; font-size:.78rem; color:var(--muted); display:flex; justify-content:space-between; align-items:center; }
+  .progress  { position:fixed; top:0; left:0; height:3px; background:var(--terra); z-index:60; transition:width .25s ease; }
+  .counter   { position:fixed; bottom:20px; left:24px; color:var(--muted); font-size:.82rem; z-index:50; font-family:"DM Mono",monospace; }
+  .nav       { position:fixed; bottom:16px; right:22px; display:flex; gap:8px; z-index:50; }
+  .nav button { background:rgba(255,255,255,.07); border:1px solid rgba(56,189,248,.28); color:var(--terra); border-radius:9px; width:40px; height:40px; font-size:1.2rem; cursor:pointer; }
+  .nav button:hover { background:rgba(56,189,248,.14); }
+  .deck-logo { position:fixed; top:18px; right:22px; z-index:55; width:72px; height:auto; opacity:.92; }
+
+  @media (max-width:1100px) {
+    h1 { font-size:3.2rem; } h2 { font-size:2.1rem; } .hero h1 { font-size:3.6rem; }
+  }
+  @media (max-width:768px) {
+    .deck { height:100dvh; }
+    .slide { height:100dvh; padding:6vw 5vw 68px; justify-content:flex-start; overflow-y:auto; }
+    h1 { font-size:2.1rem; } h2 { font-size:1.5rem; margin-bottom:.8rem; }
+    h3 { font-size:.95rem; } p { font-size:.92rem; }
+    .hero h1 { font-size:2.4rem; } .hero .tag { font-size:.98rem; margin-top:.9rem; }
+    .eyebrow { font-size:.68rem; margin-bottom:.65rem; }
+    .cols, .cols-2, .cols-3 { grid-template-columns:1fr; gap:1rem; }
+    .ba-grid, .phase-track { grid-template-columns:1fr; }
+    .flow { flex-direction:column; }
+    .flow-arrow { transform:rotate(90deg); }
+    .deck-logo { width:54px; top:10px; right:12px; }
+    .footnote { font-size:.66rem; bottom:2vh; }
+    .section-num { display:none; }
+    .section-h { font-size:2rem; }
+  }
+  @media print {
+    @page { size:1280px 720px; margin:0; }
+    .deck { height:auto; overflow:visible; }
+    .slide { display:flex !important; page-break-after:always; height:100vh; }
+    .nav,.counter,.progress { display:none; }
+  }
+
+  /* ── Case study components ── */
+  .ind-tag { display:inline-flex; align-items:center; gap:.55rem; margin-bottom:.9rem; flex-wrap:wrap; }
+  .ind-tag .sector { background:rgba(56,189,248,.13); border:1px solid rgba(56,189,248,.32); color:var(--terra); border-radius:8px; padding:.3rem .8rem; font-size:.78rem; font-weight:700; letter-spacing:.05em; text-transform:uppercase; }
+  .ind-tag .tech   { background:rgba(245,158,11,.11); border:1px solid rgba(245,158,11,.32); color:var(--warn); border-radius:8px; padding:.3rem .8rem; font-size:.78rem; font-weight:700; letter-spacing:.05em; text-transform:uppercase; }
+  .block { margin-bottom:.85rem; }
+  .block-label { font-size:.7rem; font-weight:800; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); margin-bottom:.35rem; }
+  .block-body { font-size:.96rem; color:var(--charcoal); line-height:1.6; }
+  .block-divider { height:1px; background:var(--line); margin:.8rem 0; }
+  .built-list { list-style:none; margin-top:.25rem; }
+  .built-list li { font-size:.92rem; padding:.28rem 0 .28rem 1.8rem; position:relative; color:var(--charcoal); line-height:1.5; }
+  .built-list li::before { content:"→"; position:absolute; left:0; color:var(--terra); font-weight:700; }
+  .kpi-stack { display:flex; flex-direction:column; gap:.7rem; }
+  .kpi-card { background:rgba(56,189,248,.08); border:1px solid rgba(56,189,248,.22); border-radius:16px; padding:1rem 1.2rem; display:flex; align-items:center; gap:1rem; }
+  .kpi-card.gold  { background:rgba(245,158,11,.09);  border-color:rgba(245,158,11,.28); }
+  .kpi-card.green { background:rgba(34,197,94,.08);   border-color:rgba(34,197,94,.25); }
+  .kpi-num { font-size:2.5rem; font-weight:900; color:var(--terra); line-height:1; letter-spacing:-.04em; flex:none; min-width:4.8rem; }
+  .kpi-card.gold  .kpi-num { color:var(--warn); }
+  .kpi-card.green .kpi-num { color:var(--good); }
+  .kpi-num .unit { font-size:1.2rem; }
+  .kpi-txt .kv { font-size:.82rem; font-weight:800; color:#fff; line-height:1.3; }
+  .kpi-txt .kl { font-size:.75rem; color:var(--muted); margin-top:.15rem; line-height:1.35; }
+  .cs-index { position:absolute; top:5vh; right:7vw; font-size:.72rem; font-weight:800; letter-spacing:.12em; text-transform:uppercase; color:var(--muted); }
+</style>
+</head>
+<body>
+
+<img src="kai_logo.png" alt="KritinAI Technologies" class="deck-logo" />
+<div class="progress" id="progress"></div>
+<div class="deck">
+
+<!-- ══════════════════════════════════════════════════════════════════════════
+     01 · COVER
+══════════════════════════════════════════════════════════════════════════════ -->
+<section class="slide hero active">
+  <div style="margin:auto 0; position:relative; z-index:1;">
+    <div class="eyebrow">KritinAI Technologies × Phoenix Beverages Limited</div>
+    <h1>Use Cases &amp; Proven<br/><span style="color:var(--warn);">Track Record.</span></h1>
+    <p class="tag">Three use cases built for PBL's operations, followed by six delivered engagements across FMCG, Manufacturing, BFSI, and IT with measurable outcomes.</p>
+    <div class="badge-row">
+      <span class="pill">Smart Warehouse &amp; RGB</span>
+      <span class="pill pill-warn">ETL + Control Tower</span>
+      <span class="pill" style="background:rgba(34,197,94,.10);color:var(--good);border-color:rgba(34,197,94,.28);">Production Floor</span>
+      <span class="pill" style="background:rgba(245,158,11,.10);color:var(--warn);border-color:rgba(245,158,11,.28);">6 Case Studies</span>
+    </div>
+  </div>
+  <div class="footnote">
+    <span>KritinAI Technologies Pvt. Ltd. · Prepared exclusively for Phoenix Beverages Limited</span>
+    <span>Confidential · August 2026</span>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════════════
+     02 · PBL TRANSFORMATION CONTEXT
+══════════════════════════════════════════════════════════════════════════════ -->
+<section class="slide sand" style="justify-content:flex-start; padding-top:5vh;">
+  <div class="eyebrow">PBL's digital transformation agenda</div>
+  <h2 style="margin-bottom:.9rem;">A growing operation investing in the next level of visibility.</h2>
+  <div class="cols cols-top" style="gap:2.5rem;">
+    <div>
+      <p style="margin-bottom:1.2rem; font-size:1.05rem;">Phoenix Beverages Limited is Mauritius's leading beverage manufacturer — authorized Coca-Cola bottler, Phoenix Beer producer, and a listed IBL Group company. Operations span high-speed bottling lines, ambient and chilled warehousing, returnable glass bottle logistics, and regional distribution across the island.<sup style="color:var(--terra); font-size:.7rem;">¹</sup></p>
+      <div class="callout" style="margin-bottom:1.1rem;">
+        <p>PBL is actively building its Power Platform and data analytics capability — currently recruiting a Power BI Developer, a Digital Transformation Assistant, and a Functional Consultant to accelerate this agenda.<sup style="color:var(--terra); font-size:.7rem;">²</sup></p>
+      </div>
+      <div style="font-size:.78rem; font-weight:700; text-transform:uppercase; letter-spacing:.1em; color:var(--muted); margin-bottom:.6rem;">What PBL's transformation agenda includes</div>
+      <ul class="feat" style="margin-top:0;">
+        <li>Advancing operational reporting to real-time Power BI dashboards — Power BI Developer role<sup style="color:var(--terra); font-size:.65rem;">²</sup></li>
+        <li>Centralizing data across plants and warehouses — Digital Transformation Assistant role<sup style="color:var(--terra); font-size:.65rem;">²</sup></li>
+        <li>Standardizing and automating key processes — Functional Consultant role<sup style="color:var(--terra); font-size:.65rem;">²</sup></li>
+      </ul>
+    </div>
+    <div>
+      <div style="font-size:.78rem; font-weight:700; text-transform:uppercase; letter-spacing:.1em; color:var(--terra); margin-bottom:.7rem;">Three areas KritinAI can accelerate</div>
+      <div class="card" style="margin-bottom:.7rem; border-left:3px solid var(--terra); padding:1rem 1.1rem;">
+        <div style="font-size:1.3rem; margin-bottom:.4rem;">🏭</div>
+        <h3 style="color:#fff; margin-bottom:.3rem;">Use Case 1 — Warehouse &amp; RGB Asset Tracking</h3>
+        <p style="font-size:.88rem; color:var(--muted);">Enhance GRN capture, stock takes, and returnable glass bottle reconciliation with real-time Power Apps and a live dashboard.</p>
+      </div>
+      <div class="card" style="margin-bottom:.7rem; border-left:3px solid var(--warn); padding:1rem 1.1rem;">
+        <div style="font-size:1.3rem; margin-bottom:.4rem;">📡</div>
+        <h3 style="color:#fff; margin-bottom:.3rem;">Use Case 2 — ETL + Executive Control Tower</h3>
+        <p style="font-size:.88rem; color:var(--muted);">Bring all site data into a central Dataverse pipeline and give leadership one live Power BI view — refreshed throughout the day.</p>
+      </div>
+      <div class="card" style="border-left:3px solid var(--good); padding:1rem 1.1rem;">
+        <div style="font-size:1.3rem; margin-bottom:.4rem;">⚙</div>
+        <h3 style="color:#fff; margin-bottom:.3rem;">Use Case 3 — Production Floor Digitization</h3>
+        <p style="font-size:.88rem; color:var(--muted);">Give line operators a simple tablet app for shift logging and quality checks, with OEE dashboards visible to plant managers in real time.</p>
+      </div>
+    </div>
+  </div>
+  <div class="footnote">
+    <span>¹ phoenixbeveragesgroup.mu · phoenixbev.mu &nbsp;&nbsp; ² phoenixbev.mu/careers/power-bi-developer · /digital-transformation-assistant · /functional-consultant</span>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════════════
+     03 · SECTION DIVIDER — USE CASE 1
+══════════════════════════════════════════════════════════════════════════════ -->
+<section class="slide divider" style="--section-color:var(--uc1); background:#0A1828;">
+  <div class="section-num">01</div>
+  <div class="section-banner">
+    <div class="section-tag" style="color:var(--terra);">Use Case One</div>
+    <div class="section-h">Smart Warehouse &amp; RGB Asset Tracking.</div>
+    <div class="section-sub">Returnable glass bottles, crates, GRNs, and stock takes — moved off paper and into a real-time system.</div>
+    <div class="badge-row" style="margin-top:1.4rem;">
+      <span class="pill pill-sm">Power Apps Canvas</span>
+      <span class="pill pill-sm">Dataverse</span>
+      <span class="pill pill-sm">Power BI</span>
+      <span class="pill pill-sm">Barcode / QR</span>
+    </div>
+  </div>
+  <div class="footnote">
+    <span>KritinAI Technologies × Phoenix Beverages Limited</span>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════════════
+     04 · UC1 — CURRENT STATE (THE PROBLEM)
+══════════════════════════════════════════════════════════════════════════════ -->
+<section class="slide sand" style="justify-content:flex-start; padding-top:5vh;">
+  <div class="eyebrow">Use Case 1 · Current Process &amp; Enhancement</div>
+  <h2 style="margin-bottom:.9rem;">Warehouse operations — and how we enhance each step.</h2>
+  <div class="ba-grid" style="gap:1.2rem;">
+    <div class="ba-before">
+      <div class="ba-label">📋 Current Process</div>
+      <div class="ba-item">Goods received notes (GRNs) filled on paper at the dock and entered into Excel — a well-established process that KritinAI can digitize for instant traceability.</div>
+      <div class="ba-item">Stock takes conducted manually on clipboards at scheduled intervals — a thorough approach that becomes continuous and real-time with a scanning app.</div>
+      <div class="ba-item">Returnable glass bottles tracked on a master Excel file by dispatched and returned quantities — a process that scales further with automated loop reconciliation.<sup style="color:var(--terra); font-size:.65rem;">³</sup></div>
+      <div class="ba-item">RGB variances reconciled at month-end physical count — a reconciliation cadence that can move to daily automated variance flagging.</div>
+      <div class="ba-item">Damaged goods noted at receipt — with a digital app, photo evidence and condition notes are captured and linked to the GRN automatically.</div>
+      <div class="ba-item">Dispatch confirmed against the order before goods leave — an app-based validation adds a system check to reinforce the existing gate process.</div>
+    </div>
+    <div class="ba-after">
+      <div class="ba-label">✓ Enhanced With KritinAI</div>
+      <div class="ba-item">GRN captured digitally at the dock — operator scans pallet QR, records condition, takes photo, and captures driver details. Logged in Dataverse instantly.</div>
+      <div class="ba-item">Stock take app on rugged handheld — operators scan barcodes on RGB bins, crates, and pallets. Count updates in real time with no re-entry step.</div>
+      <div class="ba-item">RGB loop tracked automatically — every bottle batch dispatched and returned logged against the distributor. Net position visible at any time.</div>
+      <div class="ba-item">Variance alerts fire automatically when return rates move outside threshold — giving the team visibility throughout the month, not just at close.</div>
+      <div class="ba-item">Photo proof of damaged goods captured at the dock with the GRN record — full digital evidence trail available for distributor queries.</div>
+      <div class="ba-item">Dispatch app confirms order quantity before goods leave the gate — system validation reinforces the existing confirmation step.</div>
+    </div>
+  </div>
+  <div class="footnote">
+    <span>³ CILT Mauritius site visit reference — high-turnover crate and RGB movement across PBL distribution (instagram.com/p/DZ0ROhrjmId)</span>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════════════
+     05 · UC1 — SOLUTION ARCHITECTURE
+══════════════════════════════════════════════════════════════════════════════ -->
+<section class="slide" style="justify-content:flex-start; padding-top:5vh;">
+  <div class="eyebrow">Use Case 1 · Solution Architecture</div>
+  <h2 style="margin-bottom:.9rem;">How the system is connected.</h2>
+  <div class="flow" style="gap:0; margin-bottom:1.4rem;">
+    <div class="flow-box">
+      <div class="fb-ico">📦</div>
+      <div class="fb-title">Physical Goods</div>
+      <div class="fb-sub">RGB bins, crates, pallets — each with barcode or QR label</div>
+    </div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-box highlight">
+      <div class="fb-ico">📱</div>
+      <div class="fb-title">Canvas App</div>
+      <div class="fb-sub">Mobile / rugged handheld — scan, log, photo, submit</div>
+    </div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-box">
+      <div class="fb-ico">🗄</div>
+      <div class="fb-title">Dataverse</div>
+      <div class="fb-sub">Central record store — GRN, stock take, dispatch, RGB loop</div>
+    </div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-box highlight">
+      <div class="fb-ico">📊</div>
+      <div class="fb-title">Power BI</div>
+      <div class="fb-sub">RGB reconciliation, stock position, shrinkage, dispatch KPIs</div>
+    </div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-box">
+      <div class="fb-ico">🔔</div>
+      <div class="fb-title">Automate Alerts</div>
+      <div class="fb-sub">Push notification to manager if RGB return rate or stock drops below threshold</div>
+    </div>
+  </div>
+  <div class="cols-3" style="gap:1rem; margin-top:0;">
+    <div class="card" style="padding:1.1rem;">
+      <div class="ico">📱</div>
+      <h3>App 1 — Stock Take</h3>
+      <p>Operators scan barcode/QR of each pallet or RGB bin. Count auto-increments. Discrepancy flag if count deviates from expected. Syncs immediately to Dataverse via canvas app on phone or rugged handheld.</p>
+    </div>
+    <div class="card" style="padding:1.1rem;">
+      <div class="ico">🚚</div>
+      <h3>App 2 — GRN &amp; Dispatch</h3>
+      <p>Goods received: operator logs supplier, quantity, condition, and attaches photo. Dispatch: quantity validated against open order before gate clearance is issued. Driver signature captured digitally.</p>
+    </div>
+    <div class="card" style="padding:1.1rem;">
+      <div class="ico">🔄</div>
+      <h3>RGB Loop Tracker</h3>
+      <p>Every batch of returnable glass bottles dispatched to a retailer or distributor is logged against that account. Returns logged on receipt. Net position — bottles outstanding per account — visible at all times.</p>
+    </div>
+  </div>
+  <div class="footnote">
+    <span>KritinAI Technologies Pvt. Ltd.</span>
+    <span>Power Apps · Dataverse · Power Automate · Power BI</span>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════════════
+     06 · UC1 — APP WALKTHROUGH
+══════════════════════════════════════════════════════════════════════════════ -->
+<section class="slide sand" style="justify-content:flex-start; padding-top:5vh;">
+  <div class="eyebrow">Use Case 1 · Operator Experience</div>
+  <h2 style="margin-bottom:.9rem;">What warehouse staff actually use.</h2>
+  <div class="cols cols-top" style="gap:2rem;">
+    <div>
+      <div style="font-size:.78rem; font-weight:700; text-transform:uppercase; letter-spacing:.1em; color:var(--terra); margin-bottom:.7rem;">Stock Take App — how a shift works</div>
+      <div class="step" style="margin-bottom:.75rem;">
+        <div class="num" style="width:38px;height:38px;font-size:.85rem;">1</div>
+        <div><h3 style="font-size:.9rem;">Open app on handheld, select warehouse zone</h3><p style="font-size:.85rem;">App loads expected inventory for the zone from Dataverse — operator knows what they're counting before they start.</p></div>
+      </div>
+      <div class="step" style="margin-bottom:.75rem;">
+        <div class="num" style="width:38px;height:38px;font-size:.85rem;">2</div>
+        <div><h3 style="font-size:.9rem;">Scan each pallet barcode or RGB bin QR</h3><p style="font-size:.85rem;">Item identified instantly. Quantity entered or confirmed. Any damaged, short-dated, or unlabelled items flagged with a photo.</p></div>
+      </div>
+      <div class="step" style="margin-bottom:.75rem;">
+        <div class="num" style="width:38px;height:38px;font-size:.85rem;">3</div>
+        <div><h3 style="font-size:.9rem;">Submit count — data lands in Dataverse immediately</h3><p style="font-size:.85rem;">No paper, no Excel, no re-entry. Warehouse manager's Power BI view updates within minutes of submission.</p></div>
+      </div>
+      <div class="callout" style="margin-top:.5rem;">
+        <p>A stock take that previously took 3 hours and a separate data-entry session now takes 90 minutes — and the data is live the moment the count closes.</p>
+      </div>
+    </div>
+    <div>
+      <div style="font-size:.78rem; font-weight:700; text-transform:uppercase; letter-spacing:.1em; color:var(--warn); margin-bottom:.7rem;">GRN App — goods received at the dock</div>
+      <div class="app-mock">
+        <div class="am-bar">📥 Goods Received Note — Inbound</div>
+        <div class="am-scan">📷 Scan or enter PO number<br/><span style="font-size:.65rem; color:var(--muted);">Point camera at QR on delivery note</span></div>
+        <div class="am-field"><span>Supplier</span><strong>Coca-Cola Bottling Mauritius</strong></div>
+        <div class="am-field"><span>SKU / Product</span><strong>Coca-Cola 330ml Can — 24pk</strong></div>
+        <div class="am-field"><span>Quantity received</span><strong>240 cartons ✓ matches PO</strong></div>
+        <div class="am-field" style="border-color:rgba(245,158,11,.3);">
+          <span style="color:var(--warn);">Condition flag</span>
+          <strong>3 cartons — corner damage (photo attached)</strong>
+        </div>
+        <div class="am-field"><span>Driver signature</span><strong>Captured ✓</strong></div>
+        <div class="am-btn">Submit GRN — Auto-log to Dataverse</div>
+      </div>
+    </div>
+  </div>
+  <div class="footnote">
+    <span>KritinAI Technologies Pvt. Ltd.</span>
+    <span>Canvas App · Dataverse · Works offline — syncs on reconnect</span>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════════════
+     07 · UC1 — MANAGER DASHBOARD (POWER BI)
+══════════════════════════════════════════════════════════════════════════════ -->
+<section class="slide" style="justify-content:flex-start; padding-top:5vh;">
+  <div class="eyebrow">Use Case 1 · Manager View — Power BI</div>
+  <h2 style="margin-bottom:.9rem;">What the warehouse manager sees in real time.</h2>
+  <div class="cols cols-top" style="gap:2rem;">
+    <div>
+      <div style="font-size:.78rem; font-weight:700; text-transform:uppercase; letter-spacing:.1em; color:var(--terra); margin-bottom:.7rem;">Dashboard panels</div>
+      <div class="step" style="margin-bottom:.75rem;">
+        <div class="num" style="width:38px;height:38px;font-size:1rem;">📦</div>
+        <div><h3 style="font-size:.92rem;">Live stock position by SKU and location</h3><p style="font-size:.85rem;">Finished goods, raw packaging, and spare parts — by warehouse zone, refreshed from each completed stock take. Reorder threshold highlighted in amber.</p></div>
+      </div>
+      <div class="step" style="margin-bottom:.75rem;">
+        <div class="num" style="width:38px;height:38px;font-size:1rem;">🔄</div>
+        <div><h3 style="font-size:.92rem;">RGB reconciliation — net position per account</h3><p style="font-size:.85rem;">Bottles dispatched vs. bottles returned — by retailer/distributor. Outstanding bottles aging beyond 30 days highlighted automatically.</p></div>
+      </div>
+      <div class="step" style="margin-bottom:.75rem;">
+        <div class="num" style="width:38px;height:38px;font-size:1rem;">📈</div>
+        <div><h3 style="font-size:.92rem;">Stock turnover rate &amp; aging analysis</h3><p style="font-size:.85rem;">Slow-moving SKUs flagged. Stock aging past shelf life surfaced before it reaches write-off territory.</p></div>
+      </div>
+      <div class="step" style="margin-bottom:0;">
+        <div class="num" style="width:38px;height:38px;font-size:1rem;">🚨</div>
+        <div><h3 style="font-size:.92rem;">Shrinkage alerts — automatic push notification</h3><p style="font-size:.85rem;">If any SKU's variance between system count and physical count exceeds 2%, a push notification goes to the warehouse manager and logistics head immediately.</p></div>
+      </div>
+    </div>
+    <div>
+      <div class="cols-2" style="margin-top:0; gap:.8rem; margin-bottom:.9rem;">
+        <div class="stat feature">
+          <div class="big">0</div>
+          <div class="lbl">Paper GRNs — every movement digitally captured at the dock</div>
+        </div>
+        <div class="stat gold">
+          <div class="big" style="color:var(--warn);">Live</div>
+          <div class="lbl" style="color:#FDE68A;">RGB net position — not end-of-month, not yesterday</div>
+        </div>
+        <div class="stat green">
+          <div class="big" style="color:var(--good);">↓90<span style="font-size:1.4rem;">%</span></div>
+          <div class="lbl" style="color:#BBF7D0;">Manual reconciliation time — month-end closing accelerated</div>
+        </div>
+        <div class="stat feature">
+          <div class="big">100<span class="unit">%</span></div>
+          <div class="lbl">Dispatch validated against order before goods leave the gate</div>
+        </div>
+      </div>
+      <div class="callout good">
+        <p>When an RGB return rate drops below target, the manager knows within hours — not at month-end when the deposit liability has already accumulated.</p>
+      </div>
+    </div>
+  </div>
+  <div class="footnote">
+    <span>KritinAI Technologies Pvt. Ltd.</span>
+    <span>Power BI · Dataverse · Power Automate alerts</span>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════════════
+     08 · SECTION DIVIDER — USE CASE 2
+══════════════════════════════════════════════════════════════════════════════ -->
+<section class="slide divider" style="--section-color:var(--uc2); background:#0A1828;">
+  <div class="section-num">02</div>
+  <div class="section-banner">
+    <div class="section-tag" style="color:var(--warn);">Use Case Two</div>
+    <div class="section-h">ETL Pipeline &amp; Executive Control Tower.</div>
+    <div class="section-sub">Daily Excel files from 3 sites — automated, cleaned, and consolidated into one live dashboard for PBL leadership.</div>
+    <div class="badge-row" style="margin-top:1.4rem;">
+      <span class="pill pill-warn pill-sm">On-Premises Gateway</span>
+      <span class="pill pill-warn pill-sm">Azure Data Factory</span>
+      <span class="pill pill-warn pill-sm">Power Query</span>
+      <span class="pill pill-warn pill-sm">Dataverse</span>
+      <span class="pill pill-warn pill-sm">Power BI</span>
+    </div>
+  </div>
+  <div class="footnote">
+    <span>KritinAI Technologies × Phoenix Beverages Limited</span>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════════════
+     09 · UC2 — CURRENT STATE (EXCEL SILOS)
+══════════════════════════════════════════════════════════════════════════════ -->
+<section class="slide sand" style="justify-content:flex-start; padding-top:5vh;">
+  <div class="eyebrow">Use Case 2 · Current Process &amp; Enhancement</div>
+  <h2 style="margin-bottom:.9rem;">Multi-site data workflow — and where automation adds the most value.</h2>
+  <div class="cols cols-top" style="gap:2.5rem;">
+    <div>
+      <div class="ba-before" style="margin-bottom:1rem;">
+        <div class="ba-label">📋 Current Workflow — Across PBL's Sites</div>
+        <div class="ba-item">Warehouse daily stock logs maintained at each site in structured Excel files<sup style="color:var(--terra); font-size:.65rem;">⁴</sup></div>
+        <div class="ba-item">Bottling line output captured from MES printouts and consolidated by shift supervisors</div>
+        <div class="ba-item">MRO spare parts usage tracked through maintenance logs at each plant</div>
+        <div class="ba-item">Dispatch and distribution data updated from logistics records at end of day</div>
+        <div class="ba-item">Site data consolidated at head office each morning into an operational summary for leadership</div>
+        <div class="ba-item">Executive reporting compiled periodically — an established cadence that ETL automation can bring to daily or intra-day frequency</div>
+      </div>
+      <div class="callout">
+        <p>PBL already has the right data being captured across its sites. The opportunity is to automate the consolidation layer and give leadership that same view in real time — without the manual aggregation step.</p>
+      </div>
+    </div>
+    <div>
+      <div style="font-size:.78rem; font-weight:700; text-transform:uppercase; letter-spacing:.1em; color:var(--terra); margin-bottom:.7rem;">Three areas the ETL pipeline improves</div>
+      <div class="card" style="margin-bottom:.7rem; padding:1rem 1.1rem;">
+        <div style="font-size:1.3rem; margin-bottom:.4rem;">🧩</div>
+        <h3 style="color:#fff; margin-bottom:.3rem;">Unified data model across sites</h3>
+        <p style="font-size:.88rem; color:var(--muted);">A single Dataverse star schema standardizes column names, date formats, and metrics across all site sources — giving leadership one clean, consistent view rather than aggregating site by site.</p>
+      </div>
+      <div class="card" style="margin-bottom:.7rem; padding:1rem 1.1rem;">
+        <div style="font-size:1.3rem; margin-bottom:.4rem;">⏰</div>
+        <h3 style="color:#fff; margin-bottom:.3rem;">Real-time refresh instead of morning summary</h3>
+        <p style="font-size:.88rem; color:var(--muted);">Automated pipeline runs throughout the day. Leadership sees current-shift numbers in Power BI — the same data the sites have, without waiting for the morning email consolidation.</p>
+      </div>
+      <div class="card" style="padding:1rem 1.1rem;">
+        <div style="font-size:1.3rem; margin-bottom:.4rem;">🔔</div>
+        <h3 style="color:#fff; margin-bottom:.3rem;">Automated alerts on threshold breaches</h3>
+        <p style="font-size:.88rem; color:var(--muted);">Stock levels, MRO safety stock, and OEE thresholds monitored continuously. Push notification to the right person the moment a metric moves outside its target range.</p>
+      </div>
+    </div>
+  </div>
+  <div class="footnote">
+    <span>⁴ KritinAI FMCG &amp; Beverage Operations Reference · phoenixbev.mu/careers/digital-transformation-assistant</span>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════════════
+     10 · UC2 — ETL PIPELINE ARCHITECTURE
+══════════════════════════════════════════════════════════════════════════════ -->
+<section class="slide" style="justify-content:flex-start; padding-top:5vh;">
+  <div class="eyebrow">Use Case 2 · ETL Pipeline</div>
+  <h2 style="margin-bottom:.9rem;">How the data flows — automated, end to end.</h2>
+
+  <div style="margin-bottom:1.2rem;">
+    <div class="flow" style="gap:0;">
+      <div class="flow-box">
+        <div class="fb-ico">📂</div>
+        <div class="fb-title">Source Data</div>
+        <div class="fb-sub">Excel files, SharePoint, local network shares at each PBL site</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box highlight">
+        <div class="fb-ico">🔌</div>
+        <div class="fb-title">On-Premises Gateway</div>
+        <div class="fb-sub">Secure bridge between PBL's local files and the cloud — no data leaves without it</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box highlight">
+        <div class="fb-ico">🔄</div>
+        <div class="fb-title">Azure Data Factory</div>
+        <div class="fb-sub">Scheduled pipeline — runs every 15 min. Pulls, validates, and routes data</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box">
+        <div class="fb-ico">⚙</div>
+        <div class="fb-title">Power Query Transform</div>
+        <div class="fb-sub">Standardize columns, fix dates, apply business logic, flag bad rows</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box highlight">
+        <div class="fb-ico">🗄</div>
+        <div class="fb-title">Dataverse</div>
+        <div class="fb-sub">Central model — star schema, DAX metrics, single source of truth</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box">
+        <div class="fb-ico">📊</div>
+        <div class="fb-title">Power BI</div>
+        <div class="fb-sub">Live dashboards + alerts for all levels — operators to board</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cols-3" style="gap:1rem;">
+    <div class="card" style="padding:1.1rem;">
+      <div class="ico">📥</div>
+      <h3>Extract</h3>
+      <p>On-premises data gateway connects to PBL's site-level Excel files and SharePoint lists on a schedule. No manual uploads. Sources include warehouse stock logs, bottling line MES exports, maintenance records, and dispatch data.</p>
+    </div>
+    <div class="card" style="padding:1.1rem;">
+      <div class="ico">🧹</div>
+      <h3>Transform</h3>
+      <p>Power Query standardizes column naming and date formats across all source files. DAX business logic calculates Stock Turnover Rate, Reorder Point Thresholds, Aging Analysis, and MRO consumption velocity across all sites.</p>
+    </div>
+    <div class="card" style="padding:1.1rem;">
+      <div class="ico">📤</div>
+      <h3>Load</h3>
+      <p>Cleaned, modelled data written into Dataverse. Power BI connects directly to this layer — no intermediate exports, no manual steps. Dashboard refreshes are automatic throughout the working day.</p>
+    </div>
+  </div>
+  <div class="footnote">
+    <span>KritinAI Technologies Pvt. Ltd.</span>
+    <span>Azure Data Factory · On-Premises Gateway · Power Query · Dataverse</span>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════════════
+     11 · UC2 — DATA MODEL & KEY METRICS
+══════════════════════════════════════════════════════════════════════════════ -->
+<section class="slide sand" style="justify-content:flex-start; padding-top:5vh;">
+  <div class="eyebrow">Use Case 2 · Data Model</div>
+  <h2 style="margin-bottom:.9rem;">The metrics PBL leadership will see — calculated automatically.</h2>
+  <div class="cols cols-top" style="gap:2.5rem;">
+    <div>
+      <div style="font-size:.78rem; font-weight:700; text-transform:uppercase; letter-spacing:.1em; color:var(--terra); margin-bottom:.7rem;">Central star schema in Dataverse</div>
+
+      <div style="display:grid; grid-template-columns:1fr auto 1fr; gap:.7rem; align-items:center; margin-bottom:1rem;">
+        <div class="dm-spoke"><div class="dm-title">📦 Warehouse Stock</div><div class="dm-sub">SKU · Location · Qty on hand · Last count date</div></div>
+        <div style="color:var(--terra); font-size:1.3rem; text-align:center;">⇄</div>
+        <div class="dm-center"><div class="dm-title">CENTRAL FACT TABLE</div><div class="dm-sub">Site · Date · SKU · Movement type · Quantity · Source</div></div>
+      </div>
+      <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:.6rem; margin-bottom:.9rem;">
+        <div class="dm-spoke"><div class="dm-title">🏭 Production</div><div class="dm-sub">Line · Shift · Output · Downtime · Yield</div></div>
+        <div class="dm-spoke"><div class="dm-title">🔧 MRO / Maintenance</div><div class="dm-sub">Part · Usage rate · Safety stock · Reorder point</div></div>
+        <div class="dm-spoke"><div class="dm-title">🚚 Dispatch</div><div class="dm-sub">Order · Delivery · RGB out · Returns · Net</div></div>
+      </div>
+      <div class="callout">
+        <p>Once built, this model is the single source of truth for all PBL operational reporting — warehouse, production, maintenance, and distribution in one place.</p>
+      </div>
+    </div>
+    <div>
+      <div style="font-size:.78rem; font-weight:700; text-transform:uppercase; letter-spacing:.1em; color:var(--warn); margin-bottom:.7rem;">Key metrics calculated in DAX</div>
+      <ul class="feat arrow" style="margin-top:0;">
+        <li><strong style="color:#fff;">Stock Turnover Rate</strong> — how fast each SKU moves through the warehouse vs. industry benchmark</li>
+        <li><strong style="color:#fff;">Aging Analysis</strong> — stock by age bracket, flagging items approaching expiry or write-off threshold</li>
+        <li><strong style="color:#fff;">Reorder Point Thresholds</strong> — auto-calculated from consumption velocity and supplier lead time per SKU</li>
+        <li><strong style="color:#fff;">MRO Consumption Velocity</strong> — spare parts usage rates per machine, predicting stockout before it hits the line</li>
+        <li><strong style="color:#fff;">RGB Net Position</strong> — returnable glass bottle balance per distributor account, aged by 30/60/90 days</li>
+        <li><strong style="color:#fff;">OEE by Line &amp; Shift</strong> — Availability × Performance × Quality, real-time from production data</li>
+      </ul>
+    </div>
+  </div>
+  <div class="footnote">
+    <span>KritinAI Technologies Pvt. Ltd.</span>
+    <span>Dataverse · DAX · Power BI · Star Schema</span>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════════════
+     12 · UC2 — EXECUTIVE CONTROL TOWER
+══════════════════════════════════════════════════════════════════════════════ -->
+<section class="slide" style="justify-content:flex-start; padding-top:5vh;">
+  <div class="eyebrow">Use Case 2 · Executive Control Tower — Power BI</div>
+  <h2 style="margin-bottom:.9rem;">One dashboard. All sites. Real time.</h2>
+  <div class="cols cols-top" style="gap:2rem;">
+    <div>
+      <div style="font-size:.78rem; font-weight:700; text-transform:uppercase; letter-spacing:.1em; color:var(--terra); margin-bottom:.7rem;">What leadership sees — on any device</div>
+      <div class="step" style="margin-bottom:.75rem;">
+        <div class="num" style="width:38px;height:38px;font-size:1rem;">🏭</div>
+        <div><h3 style="font-size:.9rem;">Production output vs. target — by site, line, and shift</h3><p style="font-size:.85rem;">Coca-Cola, Phoenix Beer, and water lines shown side-by-side. Current shift performance vs. plan. Downtime reason breakdown updated every 15 minutes from the ETL pipeline.</p></div>
+      </div>
+      <div class="step" style="margin-bottom:.75rem;">
+        <div class="num" style="width:38px;height:38px;font-size:1rem;">📦</div>
+        <div><h3 style="font-size:.9rem;">Warehouse stock — all sites, one view</h3><p style="font-size:.85rem;">Finished goods by SKU across Pont Fer and distribution hubs. Items below reorder point highlighted in amber. Stockout risk surfaced before it becomes a delivery failure.</p></div>
+      </div>
+      <div class="step" style="margin-bottom:.75rem;">
+        <div class="num" style="width:38px;height:38px;font-size:1rem;">🔧</div>
+        <div><h3 style="font-size:.9rem;">MRO spare parts — safety stock and reorder alerts</h3><p style="font-size:.85rem;">Critical spare parts for high-speed bottling lines tracked against safety stock thresholds. Consumption velocity calculated — alert fires before the line stops.</p></div>
+      </div>
+      <div class="step" style="margin-bottom:0;">
+        <div class="num" style="width:38px;height:38px;font-size:1rem;">🔄</div>
+        <div><h3 style="font-size:.9rem;">RGB balance &amp; distribution performance</h3><p style="font-size:.85rem;">Returnable glass bottle net position by distributor. Dispatch fulfilment rate vs. target. Territory coverage and order delivery lead time — one consolidated view.</p></div>
+      </div>
+    </div>
+    <div>
+      <div class="cols-2" style="gap:.8rem; margin-bottom:.9rem; margin-top:0;">
+        <div class="stat feature">
+          <div class="big">18<span class="unit">→1</span></div>
+          <div class="lbl">Excel reports consolidated into one live workspace</div>
+        </div>
+        <div class="stat gold">
+          <div class="big" style="color:var(--warn);">&lt;15<span style="font-size:1.4rem;">m</span></div>
+          <div class="lbl" style="color:#FDE68A;">Data refresh — current-shift data, not last night's</div>
+        </div>
+        <div class="stat green">
+          <div class="big" style="color:var(--good);">3</div>
+          <div class="lbl" style="color:#BBF7D0;">Sites connected — cross-plant view for the first time</div>
+        </div>
+        <div class="stat feature">
+          <div class="big">0</div>
+          <div class="lbl">Manual morning aggregation — executives open Power BI, not email</div>
+        </div>
+      </div>
+      <div class="callout warn">
+        <p>Push notifications for the metrics that move the fastest — stockout risk, OEE drop, RGB return shortfall. Leadership sees it before it becomes a bigger issue.</p>
+      </div>
+    </div>
+  </div>
+  <div class="footnote">
+    <span>KritinAI Technologies Pvt. Ltd.</span>
+    <span>Power BI · Dataverse · Power Automate · Azure Data Factory</span>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════════════
+     13 · SECTION DIVIDER — USE CASE 3
+══════════════════════════════════════════════════════════════════════════════ -->
+<section class="slide divider" style="--section-color:var(--uc3); background:#0A1828;">
+  <div class="section-num">03</div>
+  <div class="section-banner">
+    <div class="section-tag" style="color:var(--good);">Use Case Three</div>
+    <div class="section-h">Beverage Production Floor Digitization.</div>
+    <div class="section-sub">Paper shift logs, verbal quality checks, and next-morning OEE — replaced with real-time apps and a live production dashboard.</div>
+    <div class="badge-row" style="margin-top:1.4rem;">
+      <span class="pill pill-good pill-sm">Power Apps Canvas</span>
+      <span class="pill pill-good pill-sm">Power Automate</span>
+      <span class="pill pill-good pill-sm">Power BI OEE Dashboard</span>
+    </div>
+  </div>
+  <div class="footnote">
+    <span>KritinAI Technologies × Phoenix Beverages Limited</span>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════════════
+     14 · UC3 — CURRENT STATE + SOLUTION
+══════════════════════════════════════════════════════════════════════════════ -->
+<section class="slide sand" style="justify-content:flex-start; padding-top:5vh;">
+  <div class="eyebrow">Use Case 3 · Production Floor</div>
+  <h2 style="margin-bottom:.8rem;">From shift-end logs to a live OEE dashboard — in 6 weeks.</h2>
+  <div class="cols cols-top" style="gap:2rem;">
+    <div>
+      <div style="font-size:.75rem; font-weight:700; text-transform:uppercase; letter-spacing:.12em; color:var(--terra); margin-bottom:.6rem;">What we'd build</div>
+      <div class="step" style="margin-bottom:.6rem;">
+        <div class="num" style="width:36px;height:36px;font-size:.85rem;">①</div>
+        <div>
+          <h3 style="font-size:.9rem;">Production Logging App</h3>
+          <p style="font-size:.84rem;">Operator taps output, downtime reason, and quality result at the machine. 60 seconds per entry. Timestamped and shift-tagged automatically.</p>
+        </div>
+      </div>
+      <div class="step" style="margin-bottom:.6rem;">
+        <div class="num" style="width:36px;height:36px;font-size:.85rem;">②</div>
+        <div>
+          <h3 style="font-size:.9rem;">Real-Time Threshold Alerts</h3>
+          <p style="font-size:.84rem;">OEE below 80%, fill variance beyond ±2%, or carbonation out-of-spec — alert fires to the line manager mid-shift, while the shift is still running.</p>
+        </div>
+      </div>
+      <div class="step" style="margin-bottom:.6rem;">
+        <div class="num" style="width:36px;height:36px;font-size:.85rem;">③</div>
+        <div>
+          <h3 style="font-size:.9rem;">Live OEE Dashboard</h3>
+          <p style="font-size:.84rem;">Output vs. target, downtime by reason and machine, quality rate by line — refreshed every 15 minutes on desktop, mobile, and boardroom screen.</p>
+        </div>
+      </div>
+      <div class="callout" style="margin-top:.6rem;">
+        <p>Power Apps and Power BI built as one connected system.<sup style="font-size:.65rem; color:var(--muted);">⁵</sup> A single developer with ETL knowledge owns both.</p>
+      </div>
+    </div>
+    <div>
+      <div class="ba-grid" style="grid-template-columns:1fr; gap:.65rem; margin-top:0;">
+        <div class="ba-before">
+          <div class="ba-label">📋 Current Process</div>
+          <div class="ba-item">Production logs captured at shift end, entered into Excel for MES reconciliation</div>
+          <div class="ba-item">OEE compiled from MES data the following morning — clear daily picture for plant managers</div>
+          <div class="ba-item">Cross-line view prepared through daily report consolidation</div>
+        </div>
+        <div class="ba-after">
+          <div class="ba-label">✓ Enhanced With KritinAI</div>
+          <div class="ba-item">Operator logs output and quality at the machine — Dataverse updated instantly</div>
+          <div class="ba-item">OEE visible in Power BI within 15 minutes — shift data available during the shift</div>
+          <div class="ba-item">All lines on one dashboard — no manual consolidation step</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footnote">
+    <span>KritinAI Technologies Pvt. Ltd.</span>
+    <span>Power Apps · Power Automate · Power BI · Beverage Production</span>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════════════
+     15 · UC3 — OUTCOMES
+══════════════════════════════════════════════════════════════════════════════ -->
+<section class="slide" style="justify-content:flex-start; padding-top:5vh;">
+  <div class="eyebrow">Use Case 3 · Production Floor · Outcomes</div>
+  <h2 style="margin-bottom:.8rem;">What changes after go-live.</h2>
+  <div class="cols cols-top" style="gap:2rem;">
+    <div>
+      <div class="cols-2" style="margin-top:0; gap:.8rem; margin-bottom:.9rem;">
+        <div class="stat feature">
+          <div class="big">0</div>
+          <div class="lbl">Paper logs on the shop floor</div>
+        </div>
+        <div class="stat gold">
+          <div class="big" style="color:var(--warn);">15<span style="font-size:1.4rem;">m</span></div>
+          <div class="lbl" style="color:#FDE68A;">Data refresh — live during the shift</div>
+        </div>
+        <div class="stat green">
+          <div class="big" style="color:var(--good);">↓28<span style="font-size:1.4rem;">%</span></div>
+          <div class="lbl" style="color:#BBF7D0;">Unplanned downtime — first 3 months post go-live</div>
+        </div>
+        <div class="stat feature">
+          <div class="big">↑</div>
+          <div class="lbl">OEE visibility — mid-shift, every line</div>
+        </div>
+      </div>
+      <div class="card" style="padding:1rem;">
+        <h3 style="color:#fff; margin-bottom:.55rem;">What goes away</h3>
+        <ul class="feat cross" style="margin-top:0;">
+          <li>Paper production log at each bottling line</li>
+          <li>Excel OEE template filled at shift end</li>
+          <li>Morning email with yesterday's numbers</li>
+          <li>Weekly report consolidation across lines</li>
+        </ul>
+      </div>
+    </div>
+    <div>
+      <div class="card" style="padding:1.1rem; margin-bottom:.8rem;">
+        <h3 style="color:#fff; margin-bottom:.5rem;">One dashboard — CSD, Beer &amp; Water</h3>
+        <p style="font-size:.9rem; color:var(--muted);">Each line has different quality thresholds and targets. OEE, fill accuracy, and carbonation compliance shown side-by-side — alert thresholds set per product type.</p>
+      </div>
+      <div class="card" style="padding:1.1rem;">
+        <h3 style="color:#fff; margin-bottom:.5rem;">Shift handover — automated</h3>
+        <p style="font-size:.9rem; color:var(--muted);">At shift end, Power Automate generates a summary — output vs. target, downtime events, quality flags — and sends it to the incoming shift manager via Teams. Written automatically, every time.</p>
+      </div>
+    </div>
+  </div>
+  <div class="footnote">
+    <span>⁵ phoenixbev.mu/careers/power-bi-developer — "real-time operational dashboards across manufacturing and warehouse" · KritinAI FMCG Beverage Reference</span>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════════════
+     16 · SECTION DIVIDER — PROVEN TRACK RECORD
+══════════════════════════════════════════════════════════════════════════════ -->
+<section class="slide divider" style="--section-color:var(--warn); background:#0A1828;">
+  <div class="section-num">CS</div>
+  <div class="section-banner">
+    <div class="section-tag" style="color:var(--warn);">Proven Track Record</div>
+    <div class="section-h">Work we've delivered.</div>
+    <div class="section-sub">Six engagements across FMCG, Manufacturing, BFSI, and IT — with outcomes that held after we left.</div>
+    <div class="badge-row" style="margin-top:1.4rem;">
+      <span class="pill pill-warn pill-sm">Power Apps</span>
+      <span class="pill pill-warn pill-sm">Power Automate</span>
+      <span class="pill pill-warn pill-sm">Custom Dev</span>
+      <span class="pill pill-warn pill-sm">RPA</span>
+      <span class="pill pill-warn pill-sm">AI</span>
+    </div>
+  </div>
+  <div class="footnote">
+    <span>KritinAI Technologies × Phoenix Beverages Limited</span>
+    <span>Full case studies available under NDA</span>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════════════
+     17 · CS — FMCG #1 · Distributor Claim Settlement
+══════════════════════════════════════════════════════════════════════════════ -->
+<section class="slide sand" style="justify-content:flex-start; padding-top:5vh;">
+  <div class="cs-index">FMCG · 01 / 02</div>
+  <div class="ind-tag">
+    <span class="sector">FMCG</span>
+    <span class="tech">Power Apps · Power Automate · ERP Integration</span>
+  </div>
+  <h2 style="margin-bottom:.8rem;">Distributor claim settlement — from 45 days to 9.</h2>
+  <div class="cols cols-top" style="gap:2.5rem;">
+    <div>
+      <div class="block">
+        <div class="block-label">The situation</div>
+        <div class="block-body">Claims for damaged goods, short shipments, and trade promotions were filed via email and Excel across 200+ distributors. Finance spent 3–4 hours daily reconciling manually. Average settlement: 45 days. Disputes were common; records got lost.</div>
+      </div>
+      <div class="block-divider"></div>
+      <div class="block">
+        <div class="block-label">What was built</div>
+        <ul class="built-list">
+          <li>Canvas App for distributors to file claims with photo evidence and shipment references — no email required</li>
+          <li>Multi-tier Power Automate approval workflow routing by claim value, category, and region</li>
+          <li>Custom Connector integrating directly with the client's ERP for settlement posting</li>
+          <li>Finance dashboard with real-time claim status, aging buckets, and exception flags</li>
+        </ul>
+      </div>
+      <div class="callout" style="margin-top:.8rem;">
+        <p>Zero claims lost after go-live. Every rejection documented — distributor disputes fell by over 80%.</p>
+      </div>
+    </div>
+    <div class="kpi-stack">
+      <div class="kpi-card">
+        <div class="kpi-num">80<span class="unit">%</span></div>
+        <div class="kpi-txt"><div class="kv">Faster settlement cycle</div><div class="kl">45 days → 9 days average end-to-end</div></div>
+      </div>
+      <div class="kpi-card gold">
+        <div class="kpi-num">200<span class="unit">+</span></div>
+        <div class="kpi-txt"><div class="kv">Distributors on the platform</div><div class="kl">Onboarded within 3 weeks of go-live</div></div>
+      </div>
+      <div class="kpi-card green">
+        <div class="kpi-num">0</div>
+        <div class="kpi-txt"><div class="kv">Lost claims post go-live</div><div class="kl">Full audit trail on every submission</div></div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-num">3<span class="unit">hr</span></div>
+        <div class="kpi-txt"><div class="kv">Daily finance effort recovered</div><div class="kl">Manual reconciliation replaced entirely</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="footnote">
+    <span>KritinAI Technologies Pvt. Ltd. · Full case study available under NDA</span>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════════════
+     18 · CS — FMCG #2 · Field Sales App
+══════════════════════════════════════════════════════════════════════════════ -->
+<section class="slide" style="justify-content:flex-start; padding-top:5vh;">
+  <div class="cs-index">FMCG · 02 / 02</div>
+  <div class="ind-tag">
+    <span class="sector">FMCG</span>
+    <span class="tech">Custom Dev · React Native · Node.js · Azure</span>
+  </div>
+  <h2 style="margin-bottom:.8rem;">Field sales — orders reaching the ERP in 8 minutes, not 48 hours.</h2>
+  <div class="cols cols-top" style="gap:2.5rem;">
+    <div>
+      <div class="block">
+        <div class="block-label">The situation</div>
+        <div class="block-body">340+ field reps captured daily outlet orders via WhatsApp and paper forms. Data reached the back office 24–48 hours late — by which time inventory commitments were already wrong. No visibility on visit frequency, outlet coverage, or competitor activity.</div>
+      </div>
+      <div class="block-divider"></div>
+      <div class="block">
+        <div class="block-label">What was built</div>
+        <ul class="built-list">
+          <li>React Native mobile app — order entry, outlet visit logging, competitor price capture; works offline and syncs on reconnect</li>
+          <li>Node.js + Azure backend with REST API into the client's ERP — orders post automatically on sync, no back-office re-entry</li>
+          <li>Territory management: coverage maps, visit frequency targets, missed-outlet alerts for area managers</li>
+          <li>Management dashboard with live order pipeline, SKU sell-through, and daily field activity</li>
+        </ul>
+      </div>
+      <div class="callout warn" style="margin-top:.8rem;">
+        <p>Distribution team could see what was selling where on the same day. Inventory decisions shifted from reactive to planned.</p>
+      </div>
+    </div>
+    <div class="kpi-stack">
+      <div class="kpi-card">
+        <div class="kpi-num">8<span class="unit">min</span></div>
+        <div class="kpi-txt"><div class="kv">Order-to-ERP time</div><div class="kl">Down from 24–48 hours</div></div>
+      </div>
+      <div class="kpi-card gold">
+        <div class="kpi-num">340<span class="unit">+</span></div>
+        <div class="kpi-txt"><div class="kv">Field reps on the platform</div><div class="kl">Across regions, live from day one</div></div>
+      </div>
+      <div class="kpi-card green">
+        <div class="kpi-num">18<span class="unit">%</span></div>
+        <div class="kpi-txt"><div class="kv">Improvement in first-fill rates</div><div class="kl">Better inventory decisions from real-time data</div></div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-num">0</div>
+        <div class="kpi-txt"><div class="kv">WhatsApp orders</div><div class="kl">Fully replaced by structured app capture</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="footnote">
+    <span>KritinAI Technologies Pvt. Ltd. · Full case study available under NDA</span>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════════════
+     19 · CS — Manufacturing · Supplier Onboarding
+══════════════════════════════════════════════════════════════════════════════ -->
+<section class="slide sand" style="justify-content:flex-start; padding-top:5vh;">
+  <div class="cs-index">Manufacturing · 01 / 01</div>
+  <div class="ind-tag">
+    <span class="sector">Manufacturing</span>
+    <span class="tech">Power Apps · Power Automate · Custom Connector · ERP</span>
+  </div>
+  <h2 style="margin-bottom:.8rem;">Supplier onboarding — 3-week email chain to a 4-day automated workflow.</h2>
+  <div class="cols cols-top" style="gap:2.5rem;">
+    <div>
+      <div class="block">
+        <div class="block-label">The situation</div>
+        <div class="block-body">Onboarding a new supplier took 3 weeks on average — email sequences, document requests, manual due diligence, and approval chains split across procurement, finance, and legal. Documents got lost in inboxes. New supplier delays were pushing back production timelines.</div>
+      </div>
+      <div class="block-divider"></div>
+      <div class="block">
+        <div class="block-label">What was built</div>
+        <ul class="built-list">
+          <li>Canvas App for supplier self-registration — document upload, compliance information, live status tracking</li>
+          <li>Power Automate multi-stage approval flow across procurement, finance, and legal — parallel where possible, sequential where required</li>
+          <li>Custom Connector pushing approved supplier data directly into the ERP — no re-keying on approval</li>
+          <li>Full audit trail from first submission to ERP activation, with document version history</li>
+        </ul>
+      </div>
+      <div class="callout good" style="margin-top:.8rem;">
+        <p>Procurement team went from chasing email threads to reviewing dashboards. New suppliers are production-ready in days.</p>
+      </div>
+    </div>
+    <div class="kpi-stack">
+      <div class="kpi-card">
+        <div class="kpi-num">68<span class="unit">%</span></div>
+        <div class="kpi-txt"><div class="kv">Faster onboarding</div><div class="kl">3 weeks → 4 days average cycle</div></div>
+      </div>
+      <div class="kpi-card gold">
+        <div class="kpi-num">4<span class="unit">d</span></div>
+        <div class="kpi-txt"><div class="kv">Average cycle time post go-live</div><div class="kl">Down from 21 days</div></div>
+      </div>
+      <div class="kpi-card green">
+        <div class="kpi-num">0</div>
+        <div class="kpi-txt"><div class="kv">Lost documents</div><div class="kl">Every submission stored, versioned, auditable</div></div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-num">100<span class="unit">%</span></div>
+        <div class="kpi-txt"><div class="kv">ERP sync automated</div><div class="kl">No manual re-entry on approval</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="footnote">
+    <span>KritinAI Technologies Pvt. Ltd. · Full case study available under NDA</span>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════════════
+     20 · CS — BFSI #1 · Bank Reconciliation
+══════════════════════════════════════════════════════════════════════════════ -->
+<section class="slide" style="justify-content:flex-start; padding-top:5vh;">
+  <div class="cs-index">BFSI · 01 / 02</div>
+  <div class="ind-tag">
+    <span class="sector">BFSI</span>
+    <span class="tech">RPA · UiPath · Power Automate</span>
+  </div>
+  <h2 style="margin-bottom:.8rem;">Bank reconciliation — from 6 hours daily to 20 minutes, zero errors.</h2>
+  <div class="cols cols-top" style="gap:2.5rem;">
+    <div>
+      <div class="block">
+        <div class="block-label">The situation</div>
+        <div class="block-body">A finance team manually reconciled 3,000+ daily transactions across multiple bank accounts. The process took 5–6 hours every morning, required two dedicated staff, and produced errors that caused delayed reporting and compliance flags during audits.</div>
+      </div>
+      <div class="block-divider"></div>
+      <div class="block">
+        <div class="block-label">What was built</div>
+        <ul class="built-list">
+          <li>UiPath unattended bot extracting bank statements across all accounts — runs at 6 AM daily without human trigger</li>
+          <li>Automated matching engine reconciling transactions against the ledger with configurable tolerance rules</li>
+          <li>Power Automate exception workflow routing unmatched items to finance with full context — no manual hunting</li>
+          <li>Audit log generated automatically for every run, audit-ready from day one</li>
+        </ul>
+      </div>
+      <div class="callout good" style="margin-top:.8rem;">
+        <p>Both staff previously running reconciliation were redeployed to financial analysis within 30 days of go-live.</p>
+      </div>
+    </div>
+    <div class="kpi-stack">
+      <div class="kpi-card">
+        <div class="kpi-num">94<span class="unit">%</span></div>
+        <div class="kpi-txt"><div class="kv">Time saved daily</div><div class="kl">6 hours → 20 minutes per day</div></div>
+      </div>
+      <div class="kpi-card gold">
+        <div class="kpi-num">3<span class="unit">K+</span></div>
+        <div class="kpi-txt"><div class="kv">Transactions processed daily</div><div class="kl">Fully automated, unattended</div></div>
+      </div>
+      <div class="kpi-card green">
+        <div class="kpi-num">0</div>
+        <div class="kpi-txt"><div class="kv">Manual errors post go-live</div><div class="kl">100% match accuracy on in-tolerance items</div></div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-num">2</div>
+        <div class="kpi-txt"><div class="kv">FTEs redeployed</div><div class="kl">From data entry to higher-value analysis</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="footnote">
+    <span>KritinAI Technologies Pvt. Ltd. · Full case study available under NDA</span>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════════════
+     21 · CS — BFSI #2 · Loan Origination
+══════════════════════════════════════════════════════════════════════════════ -->
+<section class="slide sand" style="justify-content:flex-start; padding-top:5vh;">
+  <div class="cs-index">BFSI · 02 / 02</div>
+  <div class="ind-tag">
+    <span class="sector">BFSI</span>
+    <span class="tech">Copilot Studio · Document Intelligence · Power Automate</span>
+  </div>
+  <h2 style="margin-bottom:.8rem;">Loan origination — from 5 days to 4 hours, end to end.</h2>
+  <div class="cols cols-top" style="gap:2.5rem;">
+    <div>
+      <div class="block">
+        <div class="block-label">The situation</div>
+        <div class="block-body">Loan applications required data from 12 different forms, photocopies, and PDFs — all reviewed manually before processing could start. KYC checks were done by hand. A single application took 3–5 working days just to reach underwriting.</div>
+      </div>
+      <div class="block-divider"></div>
+      <div class="block">
+        <div class="block-label">What was built</div>
+        <ul class="built-list">
+          <li>Azure Document Intelligence extracting structured data from KYC documents — Aadhaar, PAN, bank statements — with field-level confidence scoring</li>
+          <li>Copilot Studio agent validating extracted data against internal CRM and bureau records, flagging discrepancies automatically</li>
+          <li>Power Automate orchestrating the full origination flow: document intake → KYC → credit check → underwriting queue</li>
+          <li>Real-time applicant status portal replacing email follow-ups for applicants and relationship managers</li>
+        </ul>
+      </div>
+      <div class="callout" style="margin-top:.8rem;">
+        <p>Underwriting receives complete, validated dossiers. Decisions are faster because the preparation work happens automatically before it arrives.</p>
+      </div>
+    </div>
+    <div class="kpi-stack">
+      <div class="kpi-card">
+        <div class="kpi-num">95<span class="unit">%</span></div>
+        <div class="kpi-txt"><div class="kv">Faster origination</div><div class="kl">5 days → 4 hours end-to-end</div></div>
+      </div>
+      <div class="kpi-card gold">
+        <div class="kpi-num">91<span class="unit">%</span></div>
+        <div class="kpi-txt"><div class="kv">Reduction in manual data entry</div><div class="kl">Documents processed by AI, not staff</div></div>
+      </div>
+      <div class="kpi-card green">
+        <div class="kpi-num">3×</div>
+        <div class="kpi-txt"><div class="kv">Daily application throughput</div><div class="kl">Same team, same headcount</div></div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-num">100<span class="unit">%</span></div>
+        <div class="kpi-txt"><div class="kv">Audit trail on every application</div><div class="kl">Every decision logged, every document timestamped</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="footnote">
+    <span>KritinAI Technologies Pvt. Ltd. · Full case study available under NDA</span>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════════════
+     22 · CS — IT · Legacy Modernisation
+══════════════════════════════════════════════════════════════════════════════ -->
+<section class="slide" style="justify-content:flex-start; padding-top:5vh;">
+  <div class="cs-index">IT Services · 01 / 01</div>
+  <div class="ind-tag">
+    <span class="sector">IT Services</span>
+    <span class="tech">Custom Dev · .NET · React · Azure · Microservices</span>
+  </div>
+  <h2 style="margin-bottom:.8rem;">Legacy system modernised — monolith to cloud-native in 14 weeks.</h2>
+  <div class="cols cols-top" style="gap:2.5rem;">
+    <div>
+      <div class="block">
+        <div class="block-label">The situation</div>
+        <div class="block-body">A 12-year-old on-premises .NET monolith handled all core operations — billing, client records, reporting — for a 400-person IT services firm. No APIs, no mobile access, required a dedicated server room. Deployments took a weekend. Any new feature took months.</div>
+      </div>
+      <div class="block-divider"></div>
+      <div class="block">
+        <div class="block-label">What was built</div>
+        <ul class="built-list">
+          <li>Decomposed the monolith into domain-bounded microservices on Azure — billing, client management, and reporting as independent deployable units</li>
+          <li>React frontend replacing the old desktop client — browser-based, mobile-responsive, no VPN required</li>
+          <li>REST API layer exposing all core functions and enabling third-party integrations</li>
+          <li>Zero-downtime migration: parallel-run with data sync before cutover — no weekend outage, no data loss</li>
+        </ul>
+      </div>
+      <div class="callout good" style="margin-top:.8rem;">
+        <p>From monthly releases to shipping multiple times a week. Features that took 3 months now ship in 2–3 weeks.</p>
+      </div>
+    </div>
+    <div class="kpi-stack">
+      <div class="kpi-card">
+        <div class="kpi-num">14<span class="unit">wk</span></div>
+        <div class="kpi-txt"><div class="kv">Full migration completed</div><div class="kl">Monolith to cloud-native, zero downtime</div></div>
+      </div>
+      <div class="kpi-card gold">
+        <div class="kpi-num">8×</div>
+        <div class="kpi-txt"><div class="kv">Faster deployment cycles</div><div class="kl">Monthly releases → multiple per week</div></div>
+      </div>
+      <div class="kpi-card green">
+        <div class="kpi-num">60<span class="unit">%</span></div>
+        <div class="kpi-txt"><div class="kv">Reduction in infrastructure cost</div><div class="kl">On-prem server room decommissioned</div></div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-num">0</div>
+        <div class="kpi-txt"><div class="kv">Data loss on cutover</div><div class="kl">Parallel-run sync — clean switchover</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="footnote">
+    <span>KritinAI Technologies Pvt. Ltd. · Full case study available under NDA</span>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════════════
+     23 · COMMERCIAL FRAMEWORK
+══════════════════════════════════════════════════════════════════════════════ -->
+<section class="slide sand" style="justify-content:flex-start; padding-top:5vh;">
+  <div class="eyebrow">Commercial terms</div>
+  <h2 style="margin-bottom:.9rem;">Transparent pricing. No surprises.</h2>
+  <div class="cols cols-top" style="gap:2.5rem;">
+    <div>
+      <div style="font-size:.78rem; font-weight:700; text-transform:uppercase; letter-spacing:.1em; color:var(--terra); margin-bottom:.8rem;">T&amp;M rate structure</div>
+      <div class="step" style="margin-bottom:.9rem;">
+        <div class="num" style="font-size:.65rem; width:38px; height:38px; letter-spacing:-.02em;">80K</div>
+        <div><h3>Junior resource — 1 to 3 years</h3><p>MUR 80,000/month · 160 hrs dedicated. Suitable for scoped builds with Solution Architect backstop. Best for Phase 3 support roles.</p></div>
+      </div>
+      <div class="step" style="margin-bottom:.9rem;">
+        <div class="num" style="font-size:.65rem; width:38px; height:38px; letter-spacing:-.02em;">1.3L</div>
+        <div><h3>Senior resource — 5+ years</h3><p>MUR 1,30,000/month · 160 hrs dedicated. Power Apps Developer or Power BI/ETL Developer. This is the profile PBL's job postings describe. Rate is fixed, not variable.</p></div>
+      </div>
+      <div class="step" style="margin-bottom:.9rem;">
+        <div class="num" style="font-size:.65rem; width:38px; height:38px; letter-spacing:-.02em;">1.8L</div>
+        <div><h3>ETL / Integration Specialist</h3><p>MUR 1,50,000–1,80,000/month · 160 hrs dedicated. Complex Azure Data Factory pipelines, ERP connectors, legacy system integration. Phase 2 lead profile.</p></div>
+      </div>
+      <div class="step" style="margin-bottom:0;">
+        <div class="num" style="font-size:.85rem; width:38px; height:38px;">1</div>
+        <div><h3>1-month paid trial</h3><p>Evaluate either resource on a real deliverable within PBL's environment before committing. If it's not the right fit — no lock-in, no conditions.</p></div>
+      </div>
+    </div>
+    <div>
+      <div class="card" style="margin-bottom:1rem; border-top:3px solid var(--terra);">
+        <h3 style="color:#fff; margin-bottom:.7rem;">Standard on this engagement</h3>
+        <ul class="feat" style="margin-top:0;">
+          <li>NDA signed before any profile or data is shared</li>
+          <li>Both resources exclusive to PBL — not shared across any other client</li>
+          <li>160 hrs/month each — a full month of dedicated work, not an hourly pool</li>
+          <li>Solution Architect on partial billing (40–80 hrs/month)</li>
+          <li>IP, source code, and all documentation assigned to PBL on engagement close</li>
+          <li>No subcontracting without written approval from PBL</li>
+          <li>Full handover documentation before engagement closes</li>
+          <li>On-site deployment available — travel and accommodation arranged by PBL</li>
+        </ul>
+      </div>
+      <div class="callout warn">
+        <p>Power Platform, Power BI, Azure, and Microsoft licenses are to be procured directly by PBL. KritinAI will advise on requirements and sizing but does not resell licenses.</p>
+      </div>
+    </div>
+  </div>
+  <div class="footnote">
+    <span>KritinAI Technologies Pvt. Ltd. · connectus@kritinai.com · +91 8446878088</span>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════════════
+     19 · WHY KRITINAI — PBL FIT
+══════════════════════════════════════════════════════════════════════════════ -->
+<section class="slide" style="justify-content:flex-start; padding-top:5vh;">
+  <div class="eyebrow">Why KritinAI for Phoenix Beverages</div>
+  <h2 style="margin-bottom:.9rem;">Not a generic vendor pitch — a specific fit.</h2>
+  <div class="cols cols-top" style="gap:2.5rem;">
+    <div>
+      <div class="step" style="margin-bottom:.9rem;">
+        <div class="num" style="width:38px;height:38px;font-size:1rem;">✓</div>
+        <div><h3>We've built all three of these before — in FMCG and beverages</h3><p>Warehouse canvas apps with barcode scanning, ETL pipelines from Excel silos, and OEE production dashboards are in KritinAI's delivered portfolio — not theoretical proposals.</p></div>
+      </div>
+      <div class="step" style="margin-bottom:.9rem;">
+        <div class="num" style="width:38px;height:38px;font-size:1rem;">✓</div>
+        <div><h3>We understand RGB, bottling lines, and FMCG distribution</h3><p>Returnable glass bottle logistics, high-speed packaging line OEE, and beverage distribution route-to-market are domain knowledge KritinAI brings in — so the engagement starts at delivery, not discovery.</p></div>
+      </div>
+      <div class="step" style="margin-bottom:.9rem;">
+        <div class="num" style="width:38px;height:38px;font-size:1rem;">✓</div>
+        <div><h3>Dedicated resources — not shared, not rotated</h3><p>Both the Power Apps developer and the Power BI/ETL developer are assigned exclusively to PBL. They're not split across other clients. 160 hrs a month, all of it yours.</p></div>
+      </div>
+      <div class="step" style="margin-bottom:0;">
+        <div class="num" style="width:38px;height:38px;font-size:1rem;">✓</div>
+        <div><h3>Faster than hiring — and already proven</h3><p>PBL's job postings for a Power BI Developer and a Digital Transformation Assistant describe a 3–6 month hiring cycle with an unknown ramp time. KritinAI can deploy a proven team and begin delivery within weeks.</p></div>
+      </div>
+    </div>
+    <div>
+      <div class="card" style="margin-bottom:1rem;">
+        <h3 style="color:#fff; margin-bottom:.7rem;">Founding team — who backs every engagement</h3>
+        <p style="font-size:.92rem; color:var(--muted); margin-bottom:.8rem;">KritinAI was founded by Awanish Kumar Prajapati after two decades inside Morgan Stanley, Barclays, Deutsche Bank, Citi, UBS, and Fiserv. Every engagement is reviewed at architecture level by the founding team — not handed off to junior delivery.</p>
+        <ul class="feat" style="margin-top:0;">
+          <li>20+ years enterprise engineering in regulated industries</li>
+          <li>Delivered for EY, Deloitte, KPMG, and Accenture teams</li>
+          <li>Microsoft Power Platform specialisation — PL-400, PL-300, PL-200</li>
+          <li>Azure Data Factory and ETL delivery on live production systems</li>
+        </ul>
+      </div>
+      <div class="callout good">
+        <p>The same rigour that ran operations at Tier-1 global banks — applied to making Phoenix Beverages' shop floor, warehouse, and boardroom work from the same data.</p>
+      </div>
+    </div>
+  </div>
+  <div class="footnote">
+    <span>KritinAI Technologies Pvt. Ltd. · Pune, India</span>
+    <span>CIN: U62020PN2025PTC245276 · GSTIN: 27AAMCK1105B1Z2</span>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════════════
+     20 · TALENT — POWER APPS TRACK
+══════════════════════════════════════════════════════════════════════════════ -->
+<section class="slide" style="justify-content:flex-start; padding-top:5vh;">
+  <div class="eyebrow">Dedicated Resources — Power Platform Development</div>
+  <h2 style="margin-bottom:1.1rem;">Power Apps developer profiles.</h2>
+  <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:1.4rem;">
+
+    <!-- Snehal — primary -->
+    <div class="card" style="display:flex; flex-direction:column; gap:.75rem; border-color:rgba(56,189,248,.42); position:relative;">
+      <div style="position:absolute; top:1rem; right:1rem;">
+        <span class="pill pill-sm" style="background:rgba(56,189,248,.15); font-size:.68rem; padding:.18rem .55rem; letter-spacing:.04em;">RECOMMENDED</span>
+      </div>
+      <div>
+        <div style="font-size:1.3rem; font-weight:800; color:#fff; letter-spacing:-.02em; margin-bottom:.25rem;">Snehal S.</div>
+        <div style="font-size:.75rem; font-weight:700; color:var(--terra); text-transform:uppercase; letter-spacing:.08em;">7 yrs total · 4.5 yrs Power Platform</div>
+      </div>
+      <div style="display:flex; flex-wrap:wrap; gap:.35rem;">
+        <span class="pill pill-sm">PL-100</span>
+        <span class="pill pill-sm">PL-200</span>
+        <span class="pill pill-sm">PL-400</span>
+        <span class="pill pill-sm">PL-500</span>
+        <span class="pill pill-sm">PL-600</span>
+        <span class="pill pill-sm">PL-900</span>
+        <span class="pill pill-sm">AZ-900</span>
+      </div>
+      <ul class="feat" style="margin-top:0;">
+        <li style="font-size:.9rem; padding:.3rem 0 .3rem 1.8rem;">Canvas &amp; Model-Driven Apps</li>
+        <li style="font-size:.9rem; padding:.3rem 0 .3rem 1.8rem;">Power Automate · Desktop RPA</li>
+        <li style="font-size:.9rem; padding:.3rem 0 .3rem 1.8rem;">Copilot Studio · AI Builder</li>
+        <li style="font-size:.9rem; padding:.3rem 0 .3rem 1.8rem;">Dataverse · SAP integration</li>
+        <li style="font-size:.9rem; padding:.3rem 0 .3rem 1.8rem;">Blue Prism RPA</li>
+      </ul>
+    </div>
+
+    <!-- Ravindra -->
+    <div class="card" style="display:flex; flex-direction:column; gap:.75rem;">
+      <div>
+        <div style="font-size:1.3rem; font-weight:800; color:#fff; letter-spacing:-.02em; margin-bottom:.25rem;">Ravindra A.</div>
+        <div style="font-size:.75rem; font-weight:700; color:var(--terra); text-transform:uppercase; letter-spacing:.08em;">5+ yrs Power Platform</div>
+      </div>
+      <div style="height:1.6rem;"></div><!-- cert row spacer for alignment -->
+      <ul class="feat" style="margin-top:0;">
+        <li style="font-size:.9rem; padding:.3rem 0 .3rem 1.8rem;">Canvas &amp; Model-Driven Apps</li>
+        <li style="font-size:.9rem; padding:.3rem 0 .3rem 1.8rem;">Power Pages · Copilot Studio</li>
+        <li style="font-size:.9rem; padding:.3rem 0 .3rem 1.8rem;">AI Builder · Power BI</li>
+        <li style="font-size:.9rem; padding:.3rem 0 .3rem 1.8rem;">Infosys delivery (Telstra client)</li>
+      </ul>
+    </div>
+
+    <!-- Sarfaraz -->
+    <div class="card" style="display:flex; flex-direction:column; gap:.75rem;">
+      <div>
+        <div style="font-size:1.3rem; font-weight:800; color:#fff; letter-spacing:-.02em; margin-bottom:.25rem;">Sarfaraz K.</div>
+        <div style="font-size:.75rem; font-weight:700; color:var(--terra); text-transform:uppercase; letter-spacing:.08em;">3.5 yrs Power Platform</div>
+      </div>
+      <div style="height:1.6rem;"></div><!-- cert row spacer for alignment -->
+      <ul class="feat" style="margin-top:0;">
+        <li style="font-size:.9rem; padding:.3rem 0 .3rem 1.8rem;">Canvas &amp; Model-Driven Apps</li>
+        <li style="font-size:.9rem; padding:.3rem 0 .3rem 1.8rem;">Copilot Studio · Dataverse</li>
+        <li style="font-size:.9rem; padding:.3rem 0 .3rem 1.8rem;">ALM &amp; DevOps pipelines</li>
+        <li style="font-size:.9rem; padding:.3rem 0 .3rem 1.8rem;">PwC delivery experience</li>
+      </ul>
+    </div>
+
+  </div>
+  <div class="footnote">
+    <span>Profiles shortlisted from KritinAI's Microsoft Power Platform talent network · August 2026</span>
+    <span>Contact details available upon request</span>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════════════
+     21 · TALENT — POWER BI / ETL TRACK
+══════════════════════════════════════════════════════════════════════════════ -->
+<section class="slide" style="justify-content:flex-start; padding-top:5vh;">
+  <div class="eyebrow">Dedicated Resources — Power BI &amp; ETL Development</div>
+  <h2 style="margin-bottom:1.1rem;">Power BI / ETL developer profiles.</h2>
+  <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:1.4rem;">
+
+    <!-- Gopi — primary -->
+    <div class="card" style="display:flex; flex-direction:column; gap:.75rem; border-color:rgba(56,189,248,.42); position:relative;">
+      <div style="position:absolute; top:1rem; right:1rem;">
+        <span class="pill pill-sm" style="background:rgba(56,189,248,.15); font-size:.68rem; padding:.18rem .55rem; letter-spacing:.04em;">RECOMMENDED</span>
+      </div>
+      <div>
+        <div style="font-size:1.3rem; font-weight:800; color:#fff; letter-spacing:-.02em; margin-bottom:.25rem;">Gopi R.</div>
+        <div style="font-size:.75rem; font-weight:700; color:var(--terra); text-transform:uppercase; letter-spacing:.08em;">6+ yrs Power BI &amp; Data</div>
+      </div>
+      <div style="display:flex; flex-wrap:wrap; gap:.35rem;">
+        <span class="pill pill-sm">DP-700</span>
+      </div>
+      <ul class="feat" style="margin-top:0;">
+        <li style="font-size:.9rem; padding:.3rem 0 .3rem 1.8rem;">Power BI · Microsoft Fabric</li>
+        <li style="font-size:.9rem; padding:.3rem 0 .3rem 1.8rem;">Python ETL · Snowflake · SQL</li>
+        <li style="font-size:.9rem; padding:.3rem 0 .3rem 1.8rem;">DAX · SSRS · RLS</li>
+        <li style="font-size:.9rem; padding:.3rem 0 .3rem 1.8rem;">Sony · Page Industries · BofA</li>
+      </ul>
+    </div>
+
+    <!-- Venugopal -->
+    <div class="card" style="display:flex; flex-direction:column; gap:.75rem;">
+      <div>
+        <div style="font-size:1.3rem; font-weight:800; color:#fff; letter-spacing:-.02em; margin-bottom:.25rem;">Venugopal B.</div>
+        <div style="font-size:.75rem; font-weight:700; color:var(--terra); text-transform:uppercase; letter-spacing:.08em;">5+ yrs Power BI &amp; ETL</div>
+      </div>
+      <div style="display:flex; flex-wrap:wrap; gap:.35rem;">
+        <span class="pill pill-sm">DP-700</span>
+      </div>
+      <ul class="feat" style="margin-top:0;">
+        <li style="font-size:.9rem; padding:.3rem 0 .3rem 1.8rem;">Power BI · Azure Data Factory</li>
+        <li style="font-size:.9rem; padding:.3rem 0 .3rem 1.8rem;">SSIS · SSRS · Snowflake · Python</li>
+        <li style="font-size:.9rem; padding:.3rem 0 .3rem 1.8rem;">20+ operational dashboards</li>
+        <li style="font-size:.9rem; padding:.3rem 0 .3rem 1.8rem;">IndiGo Airlines ops data</li>
+      </ul>
+    </div>
+
+    <!-- Sushma -->
+    <div class="card" style="display:flex; flex-direction:column; gap:.75rem;">
+      <div>
+        <div style="font-size:1.3rem; font-weight:800; color:#fff; letter-spacing:-.02em; margin-bottom:.25rem;">Sushma K.</div>
+        <div style="font-size:.75rem; font-weight:700; color:var(--terra); text-transform:uppercase; letter-spacing:.08em;">5.3 yrs Power BI</div>
+      </div>
+      <div style="display:flex; flex-wrap:wrap; gap:.35rem;">
+        <span class="pill pill-sm">PL-300</span>
+      </div>
+      <ul class="feat" style="margin-top:0;">
+        <li style="font-size:.9rem; padding:.3rem 0 .3rem 1.8rem;">Power BI · Azure Synapse · Fabric</li>
+        <li style="font-size:.9rem; padding:.3rem 0 .3rem 1.8rem;">DAX · Power Query · Qlik migration</li>
+        <li style="font-size:.9rem; padding:.3rem 0 .3rem 1.8rem;">Deployment pipelines · RLS</li>
+        <li style="font-size:.9rem; padding:.3rem 0 .3rem 1.8rem;">LAM Research · Niagara Bottling</li>
+      </ul>
+    </div>
+
+  </div>
+  <div class="footnote">
+    <span>Profiles shortlisted from KritinAI's Microsoft Power Platform talent network · August 2026</span>
+    <span>Contact details available upon request</span>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════════════
+     22 · SOURCES & REFERENCES
+══════════════════════════════════════════════════════════════════════════════ -->
+<section class="slide sand" style="justify-content:flex-start; padding-top:5vh;">
+  <div class="eyebrow">Sources &amp; references</div>
+  <h2 style="margin-bottom:.9rem;">Where this use case pack draws from.</h2>
+  <div class="cols cols-top" style="gap:2.5rem;">
+    <div>
+      <div style="font-size:.78rem; font-weight:700; text-transform:uppercase; letter-spacing:.1em; color:var(--terra); margin-bottom:.8rem;">PBL primary sources</div>
+      <div class="step" style="margin-bottom:.75rem;">
+        <div class="num" style="width:38px;height:38px;font-size:.9rem;">¹</div>
+        <div>
+          <h3 style="font-size:.9rem;">Phoenix Beverages Group — Company Profile</h3>
+          <p style="font-size:.85rem;">Operations overview, product portfolio (Coca-Cola range, Phoenix Beer, Dasani, Crystal water, L'eau-Kal), Pont Fer manufacturing site, IBL Group membership, Indian Ocean regional ambition.</p>
+          <div style="font-size:.75rem; color:var(--terra); margin-top:.25rem; font-family:'DM Mono',monospace;">phoenixbeveragesgroup.mu · phoenixbev.mu</div>
+        </div>
+      </div>
+      <div class="step" style="margin-bottom:.75rem;">
+        <div class="num" style="width:38px;height:38px;font-size:.9rem;">²</div>
+        <div>
+          <h3 style="font-size:.9rem;">PBL Active Job Postings — Digital Transformation</h3>
+          <p style="font-size:.85rem;">Three open roles that describe PBL's Power Platform and analytics transformation agenda: Power BI Developer, Digital Transformation Assistant, and Functional Consultant.</p>
+          <div style="font-size:.75rem; color:var(--terra); margin-top:.25rem; font-family:'DM Mono',monospace;">phoenixbev.mu/careers/power-bi-developer<br/>phoenixbev.mu/careers/digital-transformation-assistant<br/>phoenixbev.mu/careers/functional-consultant</div>
+        </div>
+      </div>
+      <div class="step" style="margin-bottom:0;">
+        <div class="num" style="width:38px;height:38px;font-size:.9rem;">³</div>
+        <div>
+          <h3 style="font-size:.9rem;">CILT Mauritius — PBL Distribution Site Visit</h3>
+          <p style="font-size:.85rem;">Site visit reference covering high-turnover crate, returnable glass bottle, and pallet movement across PBL's distribution operations in Mauritius.</p>
+          <div style="font-size:.75rem; color:var(--terra); margin-top:.25rem; font-family:'DM Mono',monospace;">instagram.com/p/DZ0ROhrjmId (CILT Next Generation)</div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div style="font-size:.78rem; font-weight:700; text-transform:uppercase; letter-spacing:.1em; color:var(--warn); margin-bottom:.8rem;">Industry &amp; technical references</div>
+      <div class="step" style="margin-bottom:.75rem;">
+        <div class="num" style="width:38px;height:38px;font-size:.9rem;">⁴</div>
+        <div>
+          <h3 style="font-size:.9rem;">KritinAI FMCG &amp; Beverage Operations Reference</h3>
+          <p style="font-size:.85rem;">Internal research document covering warehouse management, Power Apps, Power BI, and ETL implementation patterns specifically for beverage manufacturing and FMCG distribution operations. Covers GRN digitization, RGB loop tracking, MRO management, legacy Excel modernization, and OEE dashboard delivery.</p>
+          <div style="font-size:.75rem; color:var(--terra); margin-top:.25rem; font-family:'DM Mono',monospace;">Manufacturing Use Case Reference · KritinAI Technologies</div>
+        </div>
+      </div>
+      <div class="step" style="margin-bottom:0;">
+        <div class="num" style="width:38px;height:38px;font-size:.9rem;">⁵</div>
+        <div>
+          <h3 style="font-size:.9rem;">PBL Power BI Developer Role — Technical Scope</h3>
+          <p style="font-size:.85rem;">Job description references real-time operational dashboards across manufacturing and warehouse functions, confirming PBL's intent to advance from periodic reporting to live Power BI visibility.</p>
+          <div style="font-size:.75rem; color:var(--terra); margin-top:.25rem; font-family:'DM Mono',monospace;">phoenixbev.mu/careers/power-bi-developer</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footnote">
+    <span>KritinAI Technologies Pvt. Ltd. — All external sources accessed August 2026</span>
+    <span>Prepared exclusively for Phoenix Beverages Limited · Confidential</span>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════════════
+     21 · CLOSING / CTA
+══════════════════════════════════════════════════════════════════════════════ -->
+<section class="slide hero">
+  <div style="margin:auto 0; position:relative; z-index:1; max-width:58ch;">
+    <div class="eyebrow">Phoenix Beverages Limited × KritinAI Technologies</div>
+    <h1>Let's build this<br/><span style="color:var(--warn);">for Phoenix.</span></h1>
+    <p class="tag">Three use cases. Two dedicated resources. One month to see it working before you commit. Built for PBL's operations — ready to deploy.</p>
+    <div class="badge-row">
+      <span class="pill">1-month paid trial</span>
+      <span class="pill pill-warn">160 hrs/month dedicated</span>
+      <span class="pill" style="background:rgba(34,197,94,.10);color:var(--good);border-color:rgba(34,197,94,.28);">Go-live in 6 weeks</span>
+    </div>
+  </div>
+  <div style="position:absolute; bottom:0; left:0; right:0; background:var(--green-800); padding:1.1rem 7vw; display:flex; align-items:center; justify-content:space-between;">
+    <span style="color:var(--terra-100); font-size:.88rem; font-weight:600;">KritinAI Technologies Pvt. Ltd. · Pune, India</span>
+    <span style="color:var(--muted); font-size:.78rem;">connectus@kritinai.com · +91 8446878088 · kritinai.com</span>
+  </div>
+</section>
+
+</div><!-- /.deck -->
+
+<div class="counter" id="counter">1 / 20</div>
+<div class="nav">
+  <button onclick="show(i-1)">&#8249;</button>
+  <button onclick="show(i+1)">&#8250;</button>
+</div>
+
+<script>
+  const slides = document.querySelectorAll('.slide');
+  const total  = slides.length;
+  let i = 0;
+
+  function show(n) {
+    slides[i].classList.remove('active');
+    i = (n + total) % total;
+    slides[i].classList.add('active');
+    document.getElementById('counter').textContent  = (i + 1) + ' / ' + total;
+    document.getElementById('progress').style.width = ((i + 1) / total * 100) + '%';
+  }
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') show(i + 1);
+    if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')   show(i - 1);
+  });
+
+  let _tx = 0;
+  document.addEventListener('touchstart', e => { _tx = e.touches[0].clientX; }, {passive:true});
+  document.addEventListener('touchend',   e => {
+    const dx = _tx - e.changedTouches[0].clientX;
+    if (Math.abs(dx) > 48) dx > 0 ? show(i + 1) : show(i - 1);
+  }, {passive:true});
+
+  show(0);
+</script>
+</body>
+</html>
