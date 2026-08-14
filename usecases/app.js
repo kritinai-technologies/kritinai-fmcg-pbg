@@ -1,4 +1,5 @@
   const slides = document.querySelectorAll('.slide');
+   const progressEl = document.getElementById('progress');
   const total  = slides.length;
   let i = 0;
 
@@ -7,7 +8,13 @@
     i = (n + total) % total;
     slides[i].classList.add('active');
     document.getElementById('counter').textContent  = (i + 1) + ' / ' + total;
-    document.getElementById('progress').style.width = ((i + 1) / total * 100) + '%';
+    
+    // Avoid inline style writes (element.style.width) so the page works
+    // under a strict CSP (style-src 'self') with no 'unsafe-inline'.
+    for (let step = 1; step <= total; step++) {
+      progressEl.classList.remove('progress-step-' + step);
+    }
+    progressEl.classList.add('progress-step-' + (i + 1));
   }
 
   document.addEventListener('keydown', e => {
@@ -21,5 +28,7 @@
     const dx = _tx - e.changedTouches[0].clientX;
     if (Math.abs(dx) > 48) dx > 0 ? show(i + 1) : show(i - 1);
   }, {passive:true});
+  document.getElementById('prevBtn').addEventListener('click', () => show(i - 1));
+  document.getElementById('nextBtn').addEventListener('click', () => show(i + 1));
 
   show(0);
