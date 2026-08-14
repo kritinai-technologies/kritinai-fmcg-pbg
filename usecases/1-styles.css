@@ -1,31 +1,31 @@
-  :root {
-    --green-900: #060F1A;
-    --green-800: #0F1C2D;
-    --green-700: #1A2E4A;
-    --green-600: #243F6B;
-    --green-400: #38BDF8;
-    --green-200: #BAE6FD;
-    --green-100: rgba(56,189,248,.22);
-    --green-50:  rgba(56,189,248,.09);
-    --terra:     #38BDF8;
-    --terra-100: #BAE6FD;
-    --terra-50:  rgba(56,189,248,.08);
-    --sand:   #0F1C2D;
-    --ink:    #F0F6FF;
-    --charcoal: #D1E0F0;
-    --muted:  #94A3B8;
-    --line:   rgba(56,189,248,.18);
-    --good:    #22C55E;
-    --good-50: rgba(34,197,94,.12);
-    --warn:    #F59E0B;
-    --warn-50: rgba(245,158,11,.12);
-    --bad:     #EF4444;
-    --uc1: #38BDF8;
-    --uc2: #F59E0B;
-    --uc3: #22C55E;
-  }
+:root {
+  --green-900: #060F1A;
+  --green-800: #0F1C2D;
+  --green-700: #1A2E4A;
+  --green-600: #243F6B;
+  --green-400: #38BDF8;
+  --green-200: #BAE6FD;
+  --green-100: rgba(56,189,248,.22);
+  --green-50:  rgba(56,189,248,.09);
+  --terra:     #38BDF8;
+  --terra-100: #BAE6FD;
+  --terra-50:  rgba(56,189,248,.08);
+  --sand:   #0F1C2D;
+  --ink:    #F0F6FF;
+  --charcoal: #D1E0F0;
+  --muted:  #94A3B8;
+  --line:   rgba(56,189,248,.18);
+  --good:    #22C55E;
+  --good-50: rgba(34,197,94,.12);
+  --warn:    #F59E0B;
+  --warn-50: rgba(245,158,11,.12);
+  --bad:     #EF4444;
+  --uc1: #38BDF8;
+  --uc2: #F59E0B;
+  --uc3: #22C55E;
+}
 
-  * { margin:0; padding:0; box-sizing:border-box; }
+* { margin:0; padding:0; box-sizing:border-box; }
   html, body { height:100%; }
   body { font-family:"DM Sans",-apple-system,sans-serif; color:var(--charcoal); background:#0A1525; -webkit-font-smoothing:antialiased; letter-spacing:-.005em; }
 
@@ -230,8 +230,9 @@
   .kpi-txt .kv { font-size:.82rem; font-weight:800; color:#fff; line-height:1.3; }
   .kpi-txt .kl { font-size:.75rem; color:var(--muted); margin-top:.15rem; line-height:1.35; }
   .cs-index { position:absolute; top:5vh; right:7vw; font-size:.72rem; font-weight:800; letter-spacing:.12em; text-transform:uppercase; color:var(--muted); }
+  /* Auto-converted inline styles from index.html — CSP-safe classes.
+   Append this whole block to your existing styles.css */
 
-/* ── Inline-style extraction (CSP-safe classes, auto-generated) ── */
 .is-1 { margin:auto 0; position:relative; z-index:1; }
 .is-2 { color:var(--warn); }
 .is-3 { background:rgba(34,197,94,.10);color:var(--good);border-color:rgba(34,197,94,.28); }
@@ -326,106 +327,3 @@
 .is-92 { position:absolute; bottom:0; left:0; right:0; background:var(--green-800); padding:1.1rem 7vw; display:flex; align-items:center; justify-content:space-between; }
 .is-93 { color:var(--terra-100); font-size:.88rem; font-weight:600; }
 .is-94 { color:var(--muted); font-size:.78rem; }
-
-/* ── CSP-safe progress bar width (attribute selectors, no inline JS style) ── */
-.progress[data-p="0"] { width:0%; }
-.progress[data-p="1"] { width:1%; }
-.progress[data-p="2"] { width:2%; }
-.progress[data-p="3"] { width:3%; }
-.progress[data-p="4"] { width:4%; }
-.progress[data-p="5"] { width:5%; }
-.progress[data-p="6"] { width:6%; }
-.progress[data-p="7"] { width:7%; }
-.progress[data-p="8"] { width:8%; }
-.progress[data-p="9"] { width:9%; }
-.progress[data-p="10"] { width:10%; }
-.progress[data-p="11"] { width:11%; }
-.progress[data-p="12"] { width:12%; }
-.progress[data-p="13"] { width:13%; }
-.progress[data-p="14"] { width:14%; }
-.progress[data-p="15"] { width:15%; }
-.progress[data-p="16"] { width:16%; }
-.progress[data-p="17"] { width:17%; }
-.progress[data-p="18"] { width:18%; }
-.progress[data-p="19"] { width:19%; }
-.progress[data-p="20"] { width:20%; }
-.progress[data-p="21"] { width:21%; }
-.progress[data-p="22"] { width:22%; }
-.progress[data-p="23"] { width:23%; }
-.progress[data-p="24"] { width:24%; }
-.progress[data-p="25"] { width:25%; }
-.progress[data-p="26"] { width:26%; }
-.progress[data-p="27"] { width:27%; }
-.progress[data-p="28"] { width:28%; }
-.progress[data-p="29"] { width:29%; }
-.progress[data-p="30"] { width:30%; }
-.progress[data-p="31"] { width:31%; }
-.progress[data-p="32"] { width:32%; }
-.progress[data-p="33"] { width:33%; }
-.progress[data-p="34"] { width:34%; }
-.progress[data-p="35"] { width:35%; }
-.progress[data-p="36"] { width:36%; }
-.progress[data-p="37"] { width:37%; }
-.progress[data-p="38"] { width:38%; }
-.progress[data-p="39"] { width:39%; }
-.progress[data-p="40"] { width:40%; }
-.progress[data-p="41"] { width:41%; }
-.progress[data-p="42"] { width:42%; }
-.progress[data-p="43"] { width:43%; }
-.progress[data-p="44"] { width:44%; }
-.progress[data-p="45"] { width:45%; }
-.progress[data-p="46"] { width:46%; }
-.progress[data-p="47"] { width:47%; }
-.progress[data-p="48"] { width:48%; }
-.progress[data-p="49"] { width:49%; }
-.progress[data-p="50"] { width:50%; }
-.progress[data-p="51"] { width:51%; }
-.progress[data-p="52"] { width:52%; }
-.progress[data-p="53"] { width:53%; }
-.progress[data-p="54"] { width:54%; }
-.progress[data-p="55"] { width:55%; }
-.progress[data-p="56"] { width:56%; }
-.progress[data-p="57"] { width:57%; }
-.progress[data-p="58"] { width:58%; }
-.progress[data-p="59"] { width:59%; }
-.progress[data-p="60"] { width:60%; }
-.progress[data-p="61"] { width:61%; }
-.progress[data-p="62"] { width:62%; }
-.progress[data-p="63"] { width:63%; }
-.progress[data-p="64"] { width:64%; }
-.progress[data-p="65"] { width:65%; }
-.progress[data-p="66"] { width:66%; }
-.progress[data-p="67"] { width:67%; }
-.progress[data-p="68"] { width:68%; }
-.progress[data-p="69"] { width:69%; }
-.progress[data-p="70"] { width:70%; }
-.progress[data-p="71"] { width:71%; }
-.progress[data-p="72"] { width:72%; }
-.progress[data-p="73"] { width:73%; }
-.progress[data-p="74"] { width:74%; }
-.progress[data-p="75"] { width:75%; }
-.progress[data-p="76"] { width:76%; }
-.progress[data-p="77"] { width:77%; }
-.progress[data-p="78"] { width:78%; }
-.progress[data-p="79"] { width:79%; }
-.progress[data-p="80"] { width:80%; }
-.progress[data-p="81"] { width:81%; }
-.progress[data-p="82"] { width:82%; }
-.progress[data-p="83"] { width:83%; }
-.progress[data-p="84"] { width:84%; }
-.progress[data-p="85"] { width:85%; }
-.progress[data-p="86"] { width:86%; }
-.progress[data-p="87"] { width:87%; }
-.progress[data-p="88"] { width:88%; }
-.progress[data-p="89"] { width:89%; }
-.progress[data-p="90"] { width:90%; }
-.progress[data-p="91"] { width:91%; }
-.progress[data-p="92"] { width:92%; }
-.progress[data-p="93"] { width:93%; }
-.progress[data-p="94"] { width:94%; }
-.progress[data-p="95"] { width:95%; }
-.progress[data-p="96"] { width:96%; }
-.progress[data-p="97"] { width:97%; }
-.progress[data-p="98"] { width:98%; }
-.progress[data-p="99"] { width:99%; }
-.progress[data-p="100"] { width:100%; }
